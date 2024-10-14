@@ -39,7 +39,7 @@ Whether you're organizing a local football match, a community esports tournament
 **Connect with Us:**
 
 - **Telegram:** [@MatchMakerBot](https://t.me/MatchMakerBot)
-- **GitHub:** [github.com/MatchMaker](https://github.com/MatchMaker)
+- **GitHub:** [github.com/MatchMaker](https://github.com/NRGLook/MatchMaker)
 - **Contact:** contact_matchmaker@gmail.com
 
 **Creators:**
