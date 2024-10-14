@@ -38,11 +38,12 @@ Whether you're organizing a local football match, a community esports tournament
 
 **Connect with Us:**
 
-- **Website:** [www.matchmaker.com](https://www.matchmaker.com)
 - **Telegram:** [@MatchMakerBot](https://t.me/MatchMakerBot)
 - **GitHub:** [github.com/MatchMaker](https://github.com/MatchMaker)
-- **Contact:** contact@matchmaker.com
+- **Contact:** contact_matchmaker@gmail.com
 
----
+**Creators:**
+- **Pavel P.:** @pashanpmrp
+- **Ilya T.:** @nrglook
 
 *MatchMaker* – Bringing Your Sports Events Together, Effortlessly.
