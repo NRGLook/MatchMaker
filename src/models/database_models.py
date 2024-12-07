@@ -28,13 +28,13 @@ class Category(Base, TimestampMixin, IDMixin):
 class User(Base, TimestampMixin, IDMixin):
     __tablename__ = 'user'
 
-    username: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, comment="Unique username of the user")
-    role: Mapped[str] = mapped_column(String(50), comment="Role of the user (e.g., admin, player, etc.)")
+    username: Mapped[str] = mapped_column(String(255), unique=True, nullable=True, comment="Unique username of the user")
+    role: Mapped[str] = mapped_column(String(50), nullable=True, comment="Role of the user (e.g., admin, player, etc.)")
     first_name: Mapped[str] = mapped_column(String(255), nullable=True, comment="User's first name")
     last_name: Mapped[str] = mapped_column(String(255), nullable=True, comment="User's last name")
-    age: Mapped[int] = mapped_column(Integer, CheckConstraint('age > 0'),
+    age: Mapped[int] = mapped_column(Integer, CheckConstraint('age > 0'), nullable=True,
                                      comment="Age of the user (must be greater than 0)")
-    experience: Mapped[int] = mapped_column(Integer, CheckConstraint('experience >= 0'), comment="Years of experience")
+    experience: Mapped[int] = mapped_column(Integer, CheckConstraint('experience >= 0'), nullable=True, comment="Years of experience")
 
 
 class Team(Base, TimestampMixin, IDMixin):
