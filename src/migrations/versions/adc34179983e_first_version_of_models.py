@@ -39,7 +39,6 @@ def upgrade() -> None:
     )
     op.create_table('user',
     sa.Column('username', sa.String(length=255), nullable=False, comment='Unique username of the user'),
-    sa.Column('password', sa.String(length=255), nullable=False, comment='Hashed password of the user'),
     sa.Column('role', sa.String(length=50), nullable=False, comment='Role of the user (e.g., admin, player, etc.)'),
     sa.Column('first_name', sa.String(length=255), nullable=False, comment="User's first name"),
     sa.Column('last_name', sa.String(length=255), nullable=False, comment="User's last name"),

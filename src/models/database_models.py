@@ -12,8 +12,6 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship, mapped_column, Mapped
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
-import uuid
-from datetime import datetime
 
 from src.models.mixins import TimestampMixin, IDMixin
 
@@ -32,7 +30,6 @@ class User(Base, TimestampMixin, IDMixin):
 
     username: Mapped[str] = mapped_column(String(255), unique=True, nullable=False,
                                           comment="Unique username of the user")
-    password: Mapped[str] = mapped_column(String(255), nullable=False, comment="Hashed password of the user")
     role: Mapped[str] = mapped_column(String(50), comment="Role of the user (e.g., admin, player, etc.)")
     first_name: Mapped[str] = mapped_column(String(255), comment="User's first name")
     last_name: Mapped[str] = mapped_column(String(255), comment="User's last name")
