@@ -23,6 +23,8 @@ class Settings(BaseModel):
     DB_USERNAME: str
     DB_PASSWORD: str
 
+    LOG_FILE_PATH: str
+
     @property
     def get_db_creds(self):
         return {
