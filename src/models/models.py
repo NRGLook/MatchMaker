@@ -1,93 +1,112 @@
 from sqlalchemy import (
-    Column, String, Integer, ForeignKey, Date, Text, Float, CheckConstraint
+    Integer,
+    String,
+    ForeignKey,
+    Date,
+    Text,
+    Float,
+    CheckConstraint,
+    DateTime,
+    func,
 )
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, mapped_column, Mapped
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
+from datetime import datetime
+
+from src.models.mixins import TimestampMixin, IDMixin
 
 Base = declarative_base()
 
-class Category(Base):
+
+class Category(Base, TimestampMixin, IDMixin):
     __tablename__ = 'category'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    description = Column(String(255))
+    name: Mapped[str] = mapped_column(String(255), nullable=False, comment="Category name (e.g., Sports, Music, etc.)")
+    description: Mapped[str] = mapped_column(String(255), comment="Description of the category")
 
 
-class User(Base):
+class User(Base, TimestampMixin, IDMixin):
     __tablename__ = 'user'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String(255), unique=True, nullable=False)
-    password = Column(String(255), nullable=False)
-    role = Column(String(50))
-    first_name = Column(String(255))
-    last_name = Column(String(255))
-    age = Column(Integer, CheckConstraint('age > 0'))
-    experience = Column(Integer, CheckConstraint('experience >= 0'))
-    created_at = Column(Date, nullable=False)
+    username: Mapped[str] = mapped_column(String(255), unique=True, nullable=False,
+                                          comment="Unique username of the user")
+    password: Mapped[str] = mapped_column(String(255), nullable=False, comment="Hashed password of the user")
+    role: Mapped[str] = mapped_column(String(50), comment="Role of the user (e.g., admin, player, etc.)")
+    first_name: Mapped[str] = mapped_column(String(255), comment="User's first name")
+    last_name: Mapped[str] = mapped_column(String(255), comment="User's last name")
+    age: Mapped[int] = mapped_column(Integer, CheckConstraint('age > 0'),
+                                     comment="Age of the user (must be greater than 0)")
+    experience: Mapped[int] = mapped_column(Integer, CheckConstraint('experience >= 0'), comment="Years of experience")
 
 
-class Team(Base):
+class Team(Base, TimestampMixin, IDMixin):
     __tablename__ = 'team'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    description = Column(String(255))
-    logo_url = Column(String(255))
+    name: Mapped[str] = mapped_column(String(255), nullable=False, comment="Team's name")
+    description: Mapped[str] = mapped_column(String(255), comment="Short description of the team")
+    logo_url: Mapped[str] = mapped_column(String(255), comment="URL of the team's logo")
 
 
-class Event(Base):
+class Event(Base, TimestampMixin, IDMixin):
     __tablename__ = 'event'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    category_id = Column(Integer, ForeignKey('category.id', ondelete="CASCADE"), nullable=False)
-    location = Column(Text)  # SQLAlchemy не поддерживает GEOGRAPHY напрямую
-    people_amount = Column(Integer, CheckConstraint('people_amount >= 0'))
-    experience = Column(Integer, CheckConstraint('experience >= 0'))
-    date_time = Column(Date, nullable=False)
-    organizer_id = Column(Integer, ForeignKey('user.id', ondelete="SET NULL"), nullable=False)
-    description = Column(String(255))
+    category_id: Mapped[UUID] = mapped_column(ForeignKey('category.id', ondelete="CASCADE"), nullable=False,
+                                              comment="ID of the associated category")
+    location: Mapped[str] = mapped_column(Text, comment="Event location")
+    people_amount: Mapped[int] = mapped_column(Integer, CheckConstraint('people_amount >= 0'),
+                                               comment="Number of participants")
+    experience: Mapped[int] = mapped_column(Integer, CheckConstraint('experience >= 0'),
+                                            comment="Experience level required")
+    date_time: Mapped[Date] = mapped_column(Date, nullable=False, comment="Date and time of the event")
+    organizer_id: Mapped[UUID] = mapped_column(ForeignKey('user.id', ondelete="SET NULL"), nullable=False,
+                                               comment="ID of the event organizer")
+    description: Mapped[str] = mapped_column(String(255), comment="Event description")
 
-    category = relationship("Category")
-    organizer = relationship("User")
+    category: Mapped[Category] = relationship("Category", backref="events")
+    organizer: Mapped[User] = relationship("User", backref="organized_events")
 
 
-class RSVP(Base):
+class RSVP(Base, TimestampMixin, IDMixin):
     __tablename__ = 'rsvp'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
-    event_id = Column(Integer, ForeignKey('event.id', ondelete="CASCADE"), nullable=False)
-    status = Column(String(50), CheckConstraint("status IN ('accepted', 'declined', 'pending')"))
-    responded_at = Column(Date)
+    user_id: Mapped[UUID] = mapped_column(ForeignKey('user.id', ondelete="CASCADE"), nullable=False,
+                                          comment="ID of the user")
+    event_id: Mapped[UUID] = mapped_column(ForeignKey('event.id', ondelete="CASCADE"), nullable=False,
+                                           comment="ID of the event")
+    status: Mapped[str] = mapped_column(String(50), CheckConstraint("status IN ('accepted', 'declined', 'pending')"),
+                                        comment="RSVP status of the user")
+    responded_at: Mapped[Date] = mapped_column(Date, comment="Date when the user responded")
 
-    user = relationship("User")
-    event = relationship("Event")
+    user: Mapped[User] = relationship("User", backref="rsvps")
+    event: Mapped[Event] = relationship("Event", backref="rsvps")
 
 
-class Player(Base):
+class Player(Base, TimestampMixin, IDMixin):
     __tablename__ = 'player'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
-    rsvp_id = Column(Integer, ForeignKey('rsvp.id', ondelete="CASCADE"), nullable=False)
-    team_id = Column(Integer, ForeignKey('team.id', ondelete="SET NULL"))
+    user_id: Mapped[UUID] = mapped_column(ForeignKey('user.id', ondelete="CASCADE"), nullable=False,
+                                          comment="ID of the user (player)")
+    rsvp_id: Mapped[UUID] = mapped_column(ForeignKey('rsvp.id', ondelete="CASCADE"), nullable=False,
+                                          comment="RSVP ID for the player")
+    team_id: Mapped[UUID] = mapped_column(ForeignKey('team.id', ondelete="SET NULL"),
+                                          comment="Team ID that the player belongs to")
 
-    user = relationship("User")
-    rsvp = relationship("RSVP")
-    team = relationship("Team")
+    user: Mapped[User] = relationship("User", backref="players")
+    rsvp: Mapped[RSVP] = relationship("RSVP", backref="players")
+    team: Mapped[Team] = relationship("Team", backref="players")
 
 
-class Statistic(Base):
+class Statistic(Base, TimestampMixin, IDMixin):
     __tablename__ = 'statistic'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
-    event_id = Column(Integer, ForeignKey('event.id', ondelete="CASCADE"), nullable=False)
-    score = Column(Integer, CheckConstraint('score >= 0'))
-    rating = Column(Float, CheckConstraint('rating >= 0 AND rating <= 5'))
-    updated_at = Column(Date, nullable=False)
-
-    user = relationship("User")
-    event = relationship("Event")
+    user_id: Mapped[UUID] = mapped_column(ForeignKey('user.id', ondelete="CASCADE"), nullable=False,
+                                          comment="ID of the user")
+    event_id: Mapped[UUID] = mapped_column(ForeignKey('event.id', ondelete="CASCADE"), nullable=False,
+                                           comment="ID of the event")
+    score: Mapped[int] = mapped_column(Integer, CheckConstraint('score >= 0'), comment="Score achieved by the user")
+    rating: Mapped[float] = mapped_column(Float, CheckConstraint('rating >= 0 AND rating <= 5'),
+                                          comment="Rating for the user (1 to 5)")
+    user: Mapped[User] = relationship("User", backref="statistics")
+    event: Mapped[Event] = relationship("Event", backref="statistics")
