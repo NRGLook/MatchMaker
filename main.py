@@ -8,8 +8,13 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from src.config.app_config import settings
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+
+async def start(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> None:
     keyboard = [
         [InlineKeyboardButton("1", callback_data="cell_1"), InlineKeyboardButton("2", callback_data="cell_2")],
         [InlineKeyboardButton("3", callback_data="cell_3"), InlineKeyboardButton("4", callback_data="cell_4")],
@@ -18,17 +23,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Выберите ячейку:", reply_markup=reply_markup)
 
 
-async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def echo(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> None:
     await update.message.reply_text(f"Вы сказали: {update.message.text}")
 
 
-async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def button_click(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> None:
     query = update.callback_query
     await query.answer()
     await query.edit_message_text(text=f"Вы нажали: {query.data}")
 
+
 def main():
-    TOKEN = "7582758306:AAEO5Wl9kCoYhFQQu0Mo79WonYK6FZbhgSs"
+    TOKEN = settings.API_KEY
 
     app = Application.builder().token(TOKEN).build()
 

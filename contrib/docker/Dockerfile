@@ -1,4 +1,9 @@
-FROM ubuntu:latest
-LABEL authors="ilyat"
+FROM python:3.12-bullseye
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["python", "-u", "main.py"]

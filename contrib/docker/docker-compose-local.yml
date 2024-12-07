@@ -4,12 +4,22 @@ x-common: &x-common
   image: local/match_maker
   build:
     context: .
+    dockerfile: Dockerfile
   env_file:
     - ./.env
   networks:
     - match_maker
 
 services:
+
+  app:
+    <<: *x-common
+    container_name: app_container
+    command: python -u main.py
+    volumes:
+      - .:/app
+    depends_on:
+      - postgresql
 
   postgresql:
     image: postgres
