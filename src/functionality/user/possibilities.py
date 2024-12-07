@@ -16,28 +16,48 @@ def convert_telegram_id_to_uuid(telegram_id: int) -> uuid.UUID:
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Стартовое приветственное окно с кнопкой начала ввода данных."""
-    welcome_text = (
-        "Привет! Я помогу тебе создать профиль.\n"
-        "Для начала, давай введем несколько данных.\n"
-        "Нажми кнопку ниже, чтобы начать!"
-    )
+    user_id = convert_telegram_id_to_uuid(update.effective_user.id)
 
-    keyboard = [
-        [InlineKeyboardButton("Начать ввод данных", callback_data="start_input")],
-    ]
+    async with get_async_session() as session:
+        user = await session.get(User, user_id)
+        if user and (user.first_name or user.last_name or user.age or user.experience):
+            welcome_text = (
+                "Привет! Ты уже заполнил часть данных. Хотите обновить информацию или пропустить шаги?"
+            )
+            keyboard = [
+                [InlineKeyboardButton("Пропустить ввод данных", callback_data="skip_input")],
+                [InlineKeyboardButton("Редактировать профиль", callback_data="edit_profile")],
+            ]
+        else:
+            welcome_text = (
+                "Привет! Я помогу тебе создать профиль.\n"
+                "Для начала, давай введем несколько данных.\n"
+                "Нажми кнопку ниже, чтобы начать!"
+            )
+            keyboard = [
+                [InlineKeyboardButton("Начать ввод данных", callback_data="start_input")],
+            ]
+
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(welcome_text, reply_markup=reply_markup)
     return FIRST_NAME
 
 
 async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Обработка нажатия кнопки для начала ввода данных."""
+    """Обработка нажатия кнопки для начала ввода данных или пропуска."""
     query = update.callback_query
     await query.answer()
 
-    await query.edit_message_text(text="Введите ваше имя:")
-    context.user_data["field"] = "first_name"
-    return FIRST_NAME
+    if query.data == "start_input":
+        await query.edit_message_text(text="Введите ваше имя:")
+        context.user_data["field"] = "first_name"
+        return FIRST_NAME
+
+    elif query.data == "skip_input":
+        return await show_grid(update, context)
+
+    elif query.data == "edit_profile":
+        return await show_grid(update, context)
 
 
 async def handle_input(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -93,6 +113,9 @@ async def handle_input(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
 async def show_grid(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Отображение сетки кнопок после ввода данных или при нажатии на 'Меню'."""
+    query = update.callback_query
+    await query.answer()
+
     keyboard = [
         [InlineKeyboardButton(f"Ячейка {i+1}", callback_data=f"cell_{i+1}") for i in range(4)],
         [InlineKeyboardButton(f"Ячейка {i+5}", callback_data=f"cell_{i+5}") for i in range(4)],
@@ -100,7 +123,8 @@ async def show_grid(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
          InlineKeyboardButton("Меню", callback_data="menu")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("Ваши действия:", reply_markup=reply_markup)
+
+    await query.message.reply_text("Ваши действия:", reply_markup=reply_markup)
     return SHOW_GRID
 
 
@@ -122,11 +146,11 @@ async def handle_grid_action(update: Update, context: ContextTypes.DEFAULT_TYPE)
                     f"Возраст: {user.age}\n"
                     f"Опыт: {user.experience}\n"
                 )
-                await query.edit_message_text(profile)
+                await query.message.edit_text(profile)
             else:
-                await query.edit_message_text("Профиль не найден.")
+                await query.message.edit_text("Профиль не найден.")
     elif query.data == "menu":
-        await query.edit_message_text("Меню:\n1. Просмотреть профиль\n2. Редактировать профиль")
+        await query.message.edit_text("Меню:\n1. Просмотреть профиль\n2. Редактировать профиль")
         await query.message.reply_text(
             "Выберите, что хотите сделать: \n"
             "1. Просмотр профиля\n"
@@ -134,4 +158,4 @@ async def handle_grid_action(update: Update, context: ContextTypes.DEFAULT_TYPE)
         )
         return SHOW_GRID
     else:
-        await query.edit_message_text(f"Вы выбрали {query.data}")
+        await query.message.edit_text(f"Вы выбрали {query.data}")
