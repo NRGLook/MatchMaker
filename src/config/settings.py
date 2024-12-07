@@ -16,23 +16,23 @@ class Settings(BaseModel):
     API_KEY: str
 
     # Database settings
-    # DB_HOST: str | None
-    # DB_PORT: str | None
-    # DB_DRIVER_NAME: str | None
-    # DB_DATABASE_NAME: str | None
-    # DB_USERNAME: str | None
-    # DB_PASSWORD: str | None
-    #
-    # @property
-    # def get_db_creds(self):
-    #     return {
-    #         "drivername": self.DB_DRIVER_NAME,
-    #         "username": self.DB_USERNAME,
-    #         "host": self.DB_HOST,
-    #         "port": self.DB_PORT,
-    #         "database": self.DB_DATABASE_NAME,
-    #         "password": self.DB_PASSWORD,
-    #     }
+    DB_HOST: str
+    DB_PORT: str
+    DB_DRIVER_NAME: str
+    DB_DATABASE_NAME: str
+    DB_USERNAME: str
+    DB_PASSWORD: str
+
+    @property
+    def get_db_creds(self):
+        return {
+            "drivername": self.DB_DRIVER_NAME,
+            "username": self.DB_USERNAME,
+            "host": self.DB_HOST,
+            "port": self.DB_PORT,
+            "database": self.DB_DATABASE_NAME,
+            "password": self.DB_PASSWORD,
+        }
 
 
 class SettingsProvider:

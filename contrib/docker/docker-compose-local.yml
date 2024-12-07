@@ -12,14 +12,14 @@ x-common: &x-common
 
 services:
 
-  app:
-    <<: *x-common
-    container_name: app_container
-    command: python -u main.py
-    volumes:
-      - .:/app
-    depends_on:
-      - postgresql
+#  app:
+#    <<: *x-common
+#    container_name: app_container
+#    command: python -u main.py
+#    volumes:
+#      - .:/app
+#    depends_on:
+#      - postgresql
 
   postgresql:
     image: postgres
