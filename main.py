@@ -14,7 +14,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Вы сказали: {update.message.text}')
 
 def main():
-    TOKEN = "7582758306:AAEO5Wl9kCoYhFQQu0Mo79WonYK6FZbhgSs"
+    TOKEN = "API_KEY"
 
     app = Application.builder().token(TOKEN).build()
 
