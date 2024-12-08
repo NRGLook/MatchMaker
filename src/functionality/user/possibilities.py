@@ -1,17 +1,15 @@
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import ContextTypes
+
 from sqlalchemy.exc import SQLAlchemyError
+
 from src.config.database_config import get_async_session
 from src.models.database_models import User
 from src.functionality.user.schemes import UserSchema
-import uuid
+from src.utils.helpers import convert_telegram_id_to_uuid
+
 
 FIRST_NAME, LAST_NAME, AGE, EXPERIENCE, SHOW_GRID, VIEW_PROFILE, EDIT_PROFILE = range(7)
-
-
-def convert_telegram_id_to_uuid(telegram_id: int) -> uuid.UUID:
-    """Преобразует целочисленный Telegram ID в UUID."""
-    return uuid.UUID(int=telegram_id, version=4)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
