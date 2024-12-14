@@ -44,7 +44,6 @@ def upgrade() -> None:
                existing_type=sa.INTEGER(),
                nullable=True,
                existing_comment='Years of experience')
-    op.drop_column('user', 'password')
     # ### end Alembic commands ###
 
 

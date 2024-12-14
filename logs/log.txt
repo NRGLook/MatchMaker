@@ -1,0 +1,22 @@
+2024-12-14 12:52:30: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
+[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
+FROM "user" 
+WHERE "user".id = $1::UUID]
+[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-12-14 12:53:52: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
+[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
+FROM "user" 
+WHERE "user".id = $1::UUID]
+[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-12-14 12:58:58: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 12:59:04: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 12:59:06: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 12:59:07: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 16:11:38: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 16:11:43: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 16:11:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 18:11:07: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 18:27:32: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
+2024-12-14 18:54:59: WARNING [MainThread] get_async_session(28): Session rollback because of exception: name 'show_grid' is not defined
