@@ -6,7 +6,7 @@ from telegram.ext import (
     filters,
 )
 
-from src.functionality.event.possibilities import get_event_conversation_handler
+from src.functionality.event.handlers import get_event_conversation_handler, handle_event_action
 from src.functionality.user.handlers import (
     start,
     button_click,
