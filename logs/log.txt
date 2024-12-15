@@ -33,3 +33,13 @@ WHERE "user".id = $1::UUID]
 2024-12-15 10:05:27: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
 2024-12-15 10:08:53: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
 2024-12-15 10:08:56: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 10:18:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 16:08:35: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 16:08:36: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 16:09:49: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 16:22:20: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.DataError'>: invalid input for query argument $1: 'input' (invalid UUID 'input': length must be between 32..36 characters, got 5)
+[SQL: SELECT event.title AS event_title, event.category_id AS event_category_id, event.location AS event_location, event.people_amount AS event_people_amount, event.experience AS event_experience, event.date_time AS event_date_time, event.organizer_id AS event_organizer_id, event.description AS event_description, event.created_at AS event_created_at, event.updated_at AS event_updated_at, event.id AS event_id 
+FROM event 
+WHERE event.id = $1::UUID]
+[parameters: ('input',)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)

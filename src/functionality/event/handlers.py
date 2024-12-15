@@ -136,7 +136,6 @@ async def handle_event_input(update: Update, context: ContextTypes.DEFAULT_TYPE)
                     await update.message.reply_text("Введите числовое значение для уровня опыта.")
                     return EXPERIENCE
 
-                # Сохранение события в базу данных
                 event = Event(
                     title=context.user_data["title"],
                     date_time=datetime.combine(
@@ -166,8 +165,9 @@ async def handle_event_input(update: Update, context: ContextTypes.DEFAULT_TYPE)
 async def view_events(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Просмотр всех событий, созданных пользователем."""
     user_id = convert_telegram_id_to_uuid(update.effective_user.id)
+    message = update.effective_message
 
-    if update.message is None:
+    if message is None:
         return
 
     async with get_async_session() as session:
@@ -175,29 +175,37 @@ async def view_events(update: Update, context: ContextTypes.DEFAULT_TYPE):
         events = result.scalars().all()
 
         if not events:
-            await update.message.reply_text("У вас нет созданных событий.")
+            await message.reply_text("У вас нет созданных событий.")
             return
 
         events_list = "\n".join([f"Событие: {event.title} | Дата: {event.date_time}" for event in events])
-        await update.message.reply_text(f"Ваши события:\n{events_list}")
+        await message.reply_text(f"Ваши события:\n{events_list}")
+
 
 async def edit_event(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Редактирование события."""
     user_id = convert_telegram_id_to_uuid(update.effective_user.id)
     event_id = context.user_data.get("event_id")
 
+    if event_id is None:
+        await update.effective_message.reply_text("ID события не найден. Выберите событие перед редактированием.")
+        return
+
+    message = update.effective_message
+    if message is None:
+        return
+
     async with get_async_session() as session:
         event = await session.get(Event, event_id)
         if not event:
-            await update.message.reply_text("Событие не найдено.")
+            await message.reply_text("Событие не найдено.")
             return
 
         if event.organizer_id != user_id:
-            await update.message.reply_text("Вы не можете редактировать это событие.")
+            await message.reply_text("Вы не можете редактировать это событие.")
             return
 
-        # Пример редактирования — изменим описание события
-        await update.message.reply_text("Введите новое описание события:")
+        await message.reply_text("Введите новое описание события:")
         context.user_data["field"] = "description"
         return DESCRIPTION
 
@@ -207,16 +215,24 @@ async def delete_event(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = convert_telegram_id_to_uuid(update.effective_user.id)
     event_id = context.user_data.get("event_id")
 
+    if event_id is None:
+        await update.effective_message.reply_text("ID события не найден. Выберите событие перед удалением.")
+        return
+
+    message = update.effective_message
+    if message is None:
+        return
+
     async with get_async_session() as session:
         event = await session.get(Event, event_id)
         if not event:
-            await update.message.reply_text("Событие не найдено.")
+            await message.reply_text("Событие не найдено.")
             return
 
         if event.organizer_id != user_id:
-            await update.message.reply_text("Вы не можете удалить это событие.")
+            await message.reply_text("Вы не можете удалить это событие.")
             return
 
         await session.delete(event)
         await session.commit()
-        await update.message.reply_text(f"Событие '{event.title}' было успешно удалено.")
+        await message.reply_text(f"Событие '{event.title}' было успешно удалено.")

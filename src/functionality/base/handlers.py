@@ -2,7 +2,7 @@ from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import ContextTypes
 
 from src.config.database_config import get_async_session
-from src.functionality.event.possibilities import start_event_creation, view_events, edit_event, delete_event
+from src.functionality.event.handlers import start_event_creation, view_events, edit_event, delete_event
 from src.models.database_models import User
 from src.utils.helpers import convert_telegram_id_to_uuid
 
