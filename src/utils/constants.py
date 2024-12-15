@@ -1,0 +1,2 @@
+WELCOME_TEXT="Hi! You've already filled in some of the data. Do you want to update the information or skip steps?"
+REGISTRATION_TEXT="Привет! Я помогу тебе создать профиль.\n Для начала, давай введем несколько данных.\nНажми кнопку ниже, чтобы начать!"

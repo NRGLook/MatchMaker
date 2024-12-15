@@ -32,6 +32,6 @@ async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
             await session.close()
 
 
-async def get_session():
+async def get_db_session():
     async with get_async_session() as session:
         yield session

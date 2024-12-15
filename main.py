@@ -1,55 +1,51 @@
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import (
-    Application,
     CommandHandler,
-    MessageHandler,
     CallbackQueryHandler,
+    Application,
+    MessageHandler,
     filters,
-    ContextTypes,
 )
 
+from src.functionality.event.possibilities import get_event_conversation_handler
+from src.functionality.user.handlers import (
+    start,
+    button_click,
+    handle_input
+)
+from src.functionality.base.handlers import handle_grid_action, show_menu, show_commands, empty_commands
 from src.config.app_config import settings
 
 
-async def start(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    keyboard = [
-        [InlineKeyboardButton("1", callback_data="cell_1"), InlineKeyboardButton("2", callback_data="cell_2")],
-        [InlineKeyboardButton("3", callback_data="cell_3"), InlineKeyboardButton("4", callback_data="cell_4")],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("Выберите ячейку:", reply_markup=reply_markup)
+def main() -> None:
+    """The main entry point for launching a Telegram bot."""
+    application = Application.builder().token(settings.API_KEY).build()
 
+    application.add_handler(CommandHandler('start', start))
+    application.add_handler(CommandHandler('menu', show_menu))
+    application.add_handler(CommandHandler('show_commands', show_commands))
+    application.add_handler(CommandHandler('empty', empty_commands))
 
-async def echo(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    await update.message.reply_text(f"Вы сказали: {update.message.text}")
+    application.add_handler(get_event_conversation_handler())
 
+    application.add_handler(
+        CallbackQueryHandler(
+            button_click,
+            pattern="^(start_input|skip_input|edit_profile)$")
+    )
+    application.add_handler(
+        CallbackQueryHandler(
+            handle_grid_action,
+            pattern="^(cell_\\d+|view_profile|menu|show_commands|create_event|view_events|edit_event|delete_event)$"
+        )
+    )
+    application.add_handler(
+        MessageHandler(
+            filters.TEXT,
+            handle_input
+        )
+    )
 
-async def button_click(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    query = update.callback_query
-    await query.answer()
-    await query.edit_message_text(text=f"Вы нажали: {query.data}")
-
-
-def main():
-    TOKEN = settings.API_KEY
-
-    app = Application.builder().token(TOKEN).build()
-
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
-    app.add_handler(CallbackQueryHandler(button_click))
-
-    app.run_polling()
-
+    application.run_polling()
 
 if __name__ == "__main__":
     main()
