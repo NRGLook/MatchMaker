@@ -48,6 +48,7 @@ class Team(Base, TimestampMixin, IDMixin):
 class Event(Base, TimestampMixin, IDMixin):
     __tablename__ = 'event'
 
+    title: Mapped[str] = mapped_column(String(255), nullable=False, comment="Title of the event")
     category_id: Mapped[UUID] = mapped_column(ForeignKey('category.id', ondelete="CASCADE"), nullable=False,
                                               comment="ID of the associated category")
     location: Mapped[str] = mapped_column(Text, comment="Event location")

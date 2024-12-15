@@ -20,3 +20,16 @@ WHERE "user".id = $1::UUID]
 2024-12-14 18:11:07: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
 2024-12-14 18:27:32: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
 2024-12-14 18:54:59: WARNING [MainThread] get_async_session(28): Session rollback because of exception: name 'show_grid' is not defined
+2024-12-14 22:44:40: WARNING [MainThread] get_async_session(28): Session rollback because of exception: Textual SQL expression 'SELECT * FROM event WHERE...' should be explicitly declared as text('SELECT * FROM event WHERE...')
+2024-12-14 22:54:12: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-14 22:54:15: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 08:34:25: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 09:28:43: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'title' is an invalid keyword argument for Event
+2024-12-15 09:28:50: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 09:52:57: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 10:02:38: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 10:05:25: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 10:05:27: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 10:05:27: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 10:08:53: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
+2024-12-15 10:08:56: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
