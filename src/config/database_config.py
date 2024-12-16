@@ -11,6 +11,7 @@ log = LoggerProvider().get_logger(__name__)
 database_url = URL.create(**settings.get_db_creds)
 async_engine = create_async_engine(
     database_url,
+    # echo=True,
     pool_pre_ping=True,
     pool_size=5,
     max_overflow=10,

@@ -59,6 +59,7 @@ async def show_menu(
         InlineKeyboardButton("Удалить событие", callback_data="delete_event")],
         [InlineKeyboardButton("Меню", callback_data="menu")],
         [InlineKeyboardButton("Просмотр команд", callback_data="show_commands")],
+        # [InlineKeyboardButton("Очистить историю бота", callback_data="clear")],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
