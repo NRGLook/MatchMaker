@@ -9,6 +9,7 @@ from src.functionality.event.handlers import (
     list_events_delete
 )
 from src.config.database_config import get_async_session
+from src.functionality.team.handlers import start_team_creation, view_teams, list_teams_edit, list_teams_delete
 from src.models.database_models import User
 from src.utils.helpers import convert_telegram_id_to_uuid
 
@@ -35,6 +36,14 @@ async def show_commands(
         "/show_commands - View available commands\n"
         "/view_profile - View profile\n"
         "/edit_profile - Edit profile\n"
+        "/create_event - Create a new event\n"
+        "/view_events - View your event\n"
+        "/edit_event - Edit event\n"
+        "/delete_event - Delete event\n"
+        "/create_team - Create a new team\n"
+        "/view_teams - View your teams\n"
+        "/edit_team - Edit a team\n"
+        "/delete_team - Delete a team\n"
         "Cells 1-4 - Select cells for action\n"
     )
 
@@ -55,15 +64,24 @@ async def show_menu(
     keyboard = [
         [InlineKeyboardButton("View Profile", callback_data="view_profile")],
         [InlineKeyboardButton("Edit Profile", callback_data="edit_profile")],
-        [InlineKeyboardButton("Cell 1", callback_data="cell_1"),
-         InlineKeyboardButton("Cell 2", callback_data="cell_2")],
-        [InlineKeyboardButton("Cell 3", callback_data="cell_3"),
-         InlineKeyboardButton("Cell 4", callback_data="cell_4")],
+
+        [InlineKeyboardButton("New feature 1", callback_data="cell_1"),
+         InlineKeyboardButton("New feature 2", callback_data="cell_2")],
+        [InlineKeyboardButton("New feature 3", callback_data="cell_3"),
+         InlineKeyboardButton("New feature 4", callback_data="cell_4")],
+
         [InlineKeyboardButton("Create Event", callback_data="create_event"),
          InlineKeyboardButton("My Events", callback_data="view_events"),
          InlineKeyboardButton("Edit Event", callback_data="edit_event"),
          InlineKeyboardButton("Delete Event", callback_data="delete_event")],
+
+        [InlineKeyboardButton("Create Team", callback_data="create_team"),
+         InlineKeyboardButton("View Teams", callback_data="view_teams"),
+         InlineKeyboardButton("Edit Team", callback_data="edit_team"),
+         InlineKeyboardButton("Delete Team", callback_data="delete_team")],
+
         [InlineKeyboardButton("Menu", callback_data="menu")],
+
         [InlineKeyboardButton("View Commands", callback_data="show_commands")],
         # [InlineKeyboardButton("Clear Bot History", callback_data="clear")],
     ]
@@ -120,6 +138,18 @@ async def handle_grid_action(
 
         elif query.data == "delete_event":
             await list_events_delete(update, context)
+
+        elif query.data == "create_team":
+            return await start_team_creation(update, context)
+
+        elif query.data == "view_teams":
+            return await view_teams(update, context)
+
+        elif query.data == "edit_team":
+            await list_teams_edit(update, context)
+
+        elif query.data == "delete_team":
+            await list_teams_delete(update, context)
 
         else:
             await query.message.edit_text(f"Unknown selection: {query.data}")
