@@ -13,66 +13,75 @@ from src.models.database_models import User
 from src.utils.helpers import convert_telegram_id_to_uuid
 
 
-async def empty_commands(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def empty_commands(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> None:
     """Clears the bot's command list."""
     await context.bot.set_my_commands([])
     await update.message.reply_text(
-        "Команды бота успешно очищены. Список команд теперь пуст."
+        "The bot's command list has been successfully cleared. The command list is now empty."
     )
 
 
-async def show_commands(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def show_commands(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> None:
     """Displays available commands."""
     commands_list = (
-        "/start - Запуск бота\n"
-        "/menu - Открытие главного меню\n"
-        "/show_commands - Просмотр доступных команд\n"
-        "/view_profile - Просмотр профиля\n"
-        "/edit_profile - Редактирование профиля\n"
-        "Ячейки 1-4 - Выбор ячеек для действия\n"
+        "/start - Start the bot\n"
+        "/menu - Open the main menu\n"
+        "/show_commands - View available commands\n"
+        "/view_profile - View profile\n"
+        "/edit_profile - Edit profile\n"
+        "Cells 1-4 - Select cells for action\n"
     )
 
     if update.callback_query:
         await update.callback_query.answer()
-        await update.callback_query.message.edit_text(f"Доступные команды:\n{commands_list}")
+        await update.callback_query.message.edit_text(f"Available commands:\n{commands_list}")
     else:
-        await update.message.reply_text(f"Доступные команды:\n{commands_list}")
+        await update.message.reply_text(f"Available commands:\n{commands_list}")
 
 
 async def show_menu(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ) -> None:
-    """Display a pop-up menu with actions and buttons."""
+    """Displays a pop-up menu with actions and buttons."""
     user_id = convert_telegram_id_to_uuid(update.effective_user.id)
 
     keyboard = [
-        [InlineKeyboardButton("Просмотреть профиль", callback_data="view_profile")],
-        [InlineKeyboardButton("Редактировать профиль", callback_data="edit_profile")],
-        [InlineKeyboardButton(f"Ячейка 1", callback_data="cell_1"),
-         InlineKeyboardButton(f"Ячейка 2", callback_data="cell_2")],
-        [InlineKeyboardButton(f"Ячейка 3", callback_data="cell_3"),
-         InlineKeyboardButton(f"Ячейка 4", callback_data="cell_4")],
-        [InlineKeyboardButton("Создать событие", callback_data="create_event"),
-        InlineKeyboardButton("Мои события", callback_data="view_events"),
-        InlineKeyboardButton("Редактировать событие", callback_data="edit_event"),
-        InlineKeyboardButton("Удалить событие", callback_data="delete_event")],
-        [InlineKeyboardButton("Меню", callback_data="menu")],
-        [InlineKeyboardButton("Просмотр команд", callback_data="show_commands")],
-        # [InlineKeyboardButton("Очистить историю бота", callback_data="clear")],
+        [InlineKeyboardButton("View Profile", callback_data="view_profile")],
+        [InlineKeyboardButton("Edit Profile", callback_data="edit_profile")],
+        [InlineKeyboardButton("Cell 1", callback_data="cell_1"),
+         InlineKeyboardButton("Cell 2", callback_data="cell_2")],
+        [InlineKeyboardButton("Cell 3", callback_data="cell_3"),
+         InlineKeyboardButton("Cell 4", callback_data="cell_4")],
+        [InlineKeyboardButton("Create Event", callback_data="create_event"),
+         InlineKeyboardButton("My Events", callback_data="view_events"),
+         InlineKeyboardButton("Edit Event", callback_data="edit_event"),
+         InlineKeyboardButton("Delete Event", callback_data="delete_event")],
+        [InlineKeyboardButton("Menu", callback_data="menu")],
+        [InlineKeyboardButton("View Commands", callback_data="show_commands")],
+        # [InlineKeyboardButton("Clear Bot History", callback_data="clear")],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     if update.message:
-        await update.message.reply_text("Выберите действие:", reply_markup=reply_markup)
+        await update.message.reply_text("Choose an action:", reply_markup=reply_markup)
     elif update.callback_query:
         query = update.callback_query
         await query.answer()
-        await query.edit_message_text("Выберите действие:", reply_markup=reply_markup)
+        await query.edit_message_text("Choose an action:", reply_markup=reply_markup)
 
 
-async def handle_grid_action(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Handle actions on the grid (e.g., view profile, manage events)."""
+async def handle_grid_action(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> None:
+    """Handles actions on the grid (e.g., view profile, manage events)."""
     query = update.callback_query
     await query.answer()
 
@@ -84,15 +93,15 @@ async def handle_grid_action(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
                 if user:
                     profile = (
-                        f"👤 Ваш профиль:\n"
-                        f"Имя: {user.first_name}\n"
-                        f"Фамилия: {user.last_name}\n"
-                        f"Возраст: {user.age}\n"
-                        f"Опыт: {user.experience}\n"
+                        f"👤 Your Profile:\n"
+                        f"First Name: {user.first_name}\n"
+                        f"Last Name: {user.last_name}\n"
+                        f"Age: {user.age}\n"
+                        f"Experience: {user.experience}\n"
                     )
                     await query.message.edit_text(profile)
                 else:
-                    await query.message.edit_text("Профиль не найден.")
+                    await query.message.edit_text("Profile not found.")
 
         elif query.data == "menu":
             await show_menu(update, context)
@@ -113,18 +122,21 @@ async def handle_grid_action(update: Update, context: ContextTypes.DEFAULT_TYPE)
             await list_events_delete(update, context)
 
         else:
-            await query.message.edit_text(f"Неизвестный выбор: {query.data}")
+            await query.message.edit_text(f"Unknown selection: {query.data}")
 
     except Exception as e:
-        print(f"Ошибка в handle_grid_action: {e}")
-        await query.message.edit_text("Произошла ошибка при обработке вашего выбора.")
+        print(f"Error in handle_grid_action: {e}")
+        await query.message.edit_text("An error occurred while processing your selection.")
 
 
-async def cancel_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Обработка отмены действия (например, отмена удаления/редактирования события)."""
+async def cancel_action(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+    """Handles action cancellation (e.g., canceling event deletion/editing)."""
     query = update.callback_query
     await query.answer()
 
-    await query.edit_message_text("Действие отменено. Вы можете вернуться в меню или выполнить другое действие.")
+    await query.edit_message_text("Action canceled. You can return to the menu or perform another action.")
 
     await show_menu(update, context)
