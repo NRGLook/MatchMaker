@@ -43,3 +43,19 @@ FROM event
 WHERE event.id = $1::UUID]
 [parameters: ('input',)]
 (Background on this error at: https://sqlalche.me/e/20/dbapi)
+2024-12-15 22:49:21: WARNING [MainThread] get_async_session(28): Session rollback because of exception: [WinError 1225] The remote computer refused the network connection
+2024-12-15 22:49:40: WARNING [MainThread] get_async_session(28): Session rollback because of exception: [WinError 1225] The remote computer refused the network connection
+2024-12-15 23:27:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
+[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
+FROM "user" 
+WHERE "user".id = $1::UUID]
+[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-12-15 23:27:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
+[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
+FROM "user" 
+WHERE "user".id = $1::UUID]
+[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-12-15 23:32:21: WARNING [MainThread] get_async_session(28): Session rollback because of exception: Textual SQL expression 'SELECT id, title FROM eve...' should be explicitly declared as text('SELECT id, title FROM eve...')
+2024-12-15 23:32:33: WARNING [MainThread] get_async_session(28): Session rollback because of exception: Textual SQL expression 'SELECT id, title FROM eve...' should be explicitly declared as text('SELECT id, title FROM eve...')

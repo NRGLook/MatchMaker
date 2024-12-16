@@ -1,8 +1,14 @@
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import ContextTypes
 
+from src.functionality.event.handlers import (
+    start_event_creation,
+    view_events,
+    handle_event_action,
+    list_events_edit,
+    list_events_delete
+)
 from src.config.database_config import get_async_session
-from src.functionality.event.handlers import start_event_creation, view_events, edit_event, delete_event
 from src.models.database_models import User
 from src.utils.helpers import convert_telegram_id_to_uuid
 
@@ -65,37 +71,59 @@ async def show_menu(
 
 
 async def handle_grid_action(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Handle actions on the grid (e.g. view profile and return to menu)."""
+    """Handle actions on the grid (e.g., view profile, manage events)."""
     query = update.callback_query
     await query.answer()
 
-    if query.data == "view_profile":
-        async with get_async_session() as session:
-            user_id = convert_telegram_id_to_uuid(update.effective_user.id)
-            user = await session.get(User, user_id)
+    try:
+        if query.data == "view_profile":
+            async with get_async_session() as session:
+                user_id = convert_telegram_id_to_uuid(update.effective_user.id)
+                user = await session.get(User, user_id)
 
-            if user:
-                profile = (
-                    f"👤 Ваш профиль:\n"
-                    f"Имя: {user.first_name}\n"
-                    f"Фамилия: {user.last_name}\n"
-                    f"Возраст: {user.age}\n"
-                    f"Опыт: {user.experience}\n"
-                )
-                await query.message.edit_text(profile)
-            else:
-                await query.message.edit_text("Профиль не найден.")
-    elif query.data == "menu":
-        await show_menu(update, context)
-    elif query.data == "show_commands":
-        await show_commands(update, context)
-    elif query.data == "create_event":
-        return await start_event_creation(update, context)
-    elif query.data == "view_events":
-        return await view_events(update, context)
-    elif query.data == "edit_event":
-        return await edit_event(update, context)
-    elif query.data == "delete_event":
-        return await delete_event(update, context)
-    else:
-        await query.message.edit_text(f"Вы выбрали {query.data}")
+                if user:
+                    profile = (
+                        f"👤 Ваш профиль:\n"
+                        f"Имя: {user.first_name}\n"
+                        f"Фамилия: {user.last_name}\n"
+                        f"Возраст: {user.age}\n"
+                        f"Опыт: {user.experience}\n"
+                    )
+                    await query.message.edit_text(profile)
+                else:
+                    await query.message.edit_text("Профиль не найден.")
+
+        elif query.data == "menu":
+            await show_menu(update, context)
+
+        elif query.data == "show_commands":
+            await show_commands(update, context)
+
+        elif query.data == "create_event":
+            return await start_event_creation(update, context)
+
+        elif query.data == "view_events":
+            return await view_events(update, context)
+
+        elif query.data == "edit_event":
+            await list_events_edit(update, context)
+
+        elif query.data == "delete_event":
+            await list_events_delete(update, context)
+
+        else:
+            await query.message.edit_text(f"Неизвестный выбор: {query.data}")
+
+    except Exception as e:
+        print(f"Ошибка в handle_grid_action: {e}")
+        await query.message.edit_text("Произошла ошибка при обработке вашего выбора.")
+
+
+async def cancel_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обработка отмены действия (например, отмена удаления/редактирования события)."""
+    query = update.callback_query
+    await query.answer()
+
+    await query.edit_message_text("Действие отменено. Вы можете вернуться в меню или выполнить другое действие.")
+
+    await show_menu(update, context)

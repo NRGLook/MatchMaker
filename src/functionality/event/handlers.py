@@ -1,3 +1,4 @@
+from sqlalchemy.ext.asyncio import AsyncSession
 from telegram.ext import (
     CommandHandler,
     CallbackQueryHandler,
@@ -13,7 +14,7 @@ from src.utils.helpers import convert_telegram_id_to_uuid
 from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
-from telegram import Update
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import ContextTypes
 
 TITLE, DATE, TIME, LOCATION, DESCRIPTION, CATEGORY, PEOPLE_AMOUNT, EXPERIENCE = range(8)
@@ -182,57 +183,175 @@ async def view_events(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await message.reply_text(f"Ваши события:\n{events_list}")
 
 
-async def edit_event(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Редактирование события."""
-    user_id = convert_telegram_id_to_uuid(update.effective_user.id)
-    event_id = context.user_data.get("event_id")
+async def handle_event_edit(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обрабатывает ввод нового названия для события."""
+    print("handle_event_edit: начался вызов функции")
 
-    if event_id is None:
-        await update.effective_message.reply_text("ID события не найден. Выберите событие перед редактированием.")
-        return
+    new_title = update.message.text
+    print(f"handle_event_edit: новое название для события = {new_title}")
 
-    message = update.effective_message
-    if message is None:
-        return
+    event_id = context.user_data.get('event_id')
+    print(f"handle_event_edit: event_id = {event_id}")
 
-    async with get_async_session() as session:
-        event = await session.get(Event, event_id)
-        if not event:
-            await message.reply_text("Событие не найдено.")
-            return
-
-        if event.organizer_id != user_id:
-            await message.reply_text("Вы не можете редактировать это событие.")
-            return
-
-        await message.reply_text("Введите новое описание события:")
-        context.user_data["field"] = "description"
-        return DESCRIPTION
-
-
-async def delete_event(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Удаление события."""
-    user_id = convert_telegram_id_to_uuid(update.effective_user.id)
-    event_id = context.user_data.get("event_id")
-
-    if event_id is None:
-        await update.effective_message.reply_text("ID события не найден. Выберите событие перед удалением.")
-        return
-
-    message = update.effective_message
-    if message is None:
+    if not event_id:
+        await update.message.reply_text("Не удалось найти событие для редактирования.")
         return
 
     async with get_async_session() as session:
         event = await session.get(Event, event_id)
+
+        if event:
+            event.title = new_title
+            await session.commit()
+            await update.message.reply_text(f"Название события было успешно изменено на: {new_title}")
+        else:
+            await update.message.reply_text("Событие не найдено.")
+
+        context.user_data.clear()
+
+
+async def list_events_edit(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Выводит список событий для редактирования и сразу обрабатывает выбор редактирования."""
+    print("list_events_edit: начался вызов функции")
+    user_id = convert_telegram_id_to_uuid(update.effective_user.id)
+    print(f"list_events_edit: преобразованный user_id = {user_id}")
+
+    async with get_async_session() as session:
+        query = select(Event.id, Event.title).where(Event.organizer_id == user_id)
+        result = await session.execute(query)
+        events = result.fetchall()
+
+        if not events:
+            await update.effective_message.reply_text("У вас нет событий для редактирования.")
+            return
+
+        print(f"list_events_edit: найдено событий: {len(events)}")
+
+        keyboard = [
+            [
+                InlineKeyboardButton(event.title, callback_data=f"edit_{event.id}")
+            ]
+            for event in events
+        ]
+
+        print(f"list_events_edit: клавиатура: {keyboard}")
+
+        await update.effective_message.reply_text(
+            "Выберите событие для редактирования:",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+
+
+async def list_events_delete(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Выводит список событий для удаления и сразу обрабатывает выбор удаления."""
+    print("list_events_delete: начался вызов функции")
+    user_id = convert_telegram_id_to_uuid(update.effective_user.id)
+    print(f"list_events_delete: преобразованный user_id = {user_id}")
+
+    async with get_async_session() as session:
+        query = select(Event.id, Event.title).where(Event.organizer_id == user_id)
+        result = await session.execute(query)
+        events = result.fetchall()
+
+        if not events:
+            await update.effective_message.reply_text("У вас нет событий для удаления.")
+            return
+
+        print(f"list_events_delete: найдено событий: {len(events)}")
+
+        keyboard = [
+            [
+                InlineKeyboardButton(event.title, callback_data=f"delete_{event.id}")
+            ]
+            for event in events
+        ]
+        await update.effective_message.reply_text(
+            "Выберите событие для удаления:",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+
+
+async def handle_event_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обрабатывает действие редактирования или удаления события."""
+    print("handle_event_action: начался вызов функции")
+
+    query = update.callback_query
+    await query.answer()
+
+    try:
+        action, event_id = query.data.split('_')
+        print(f"handle_event_action: полученные данные: action = {action}, event_id = {event_id}")
+
+        user_id = convert_telegram_id_to_uuid(update.effective_user.id)
+
+        async with get_async_session() as session:
+            event = await session.get(Event, event_id)
+
+            if not event:
+                await query.edit_message_text("Событие не найдено.")
+                return
+
+            if event.organizer_id != user_id:
+                await query.edit_message_text("Вы не можете изменить это событие.")
+                return
+
+            if action == "edit":
+                context.user_data['event_id'] = event_id
+                context.user_data['edit_stage'] = 'title'
+                await query.edit_message_text(
+                    f"Редактирование события '{event.title}' начато. Введите новое название:"
+                )
+
+            elif action == "delete":
+                await session.delete(event)
+                await session.commit()
+                await query.edit_message_text(f"Событие '{event.title}' было удалено.")
+                return
+
+    except Exception as e:
+        print(f"Ошибка при выполнении действия: {e}")
+        await query.edit_message_text("Произошла ошибка при обработке вашего выбора.")
+
+
+async def handle_event_edit(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обрабатывает редактирование различных полей события."""
+    print("handle_event_edit: начался вызов функции")
+
+    user_id = convert_telegram_id_to_uuid(update.effective_user.id)
+    event_id = context.user_data.get('event_id')
+    edit_stage = context.user_data.get('edit_stage')
+
+    if not event_id:
+        await update.effective_message.reply_text("Не найдено события для редактирования.")
+        return
+
+    async with get_async_session() as session:
+        event = await session.get(Event, event_id)
+
         if not event:
-            await message.reply_text("Событие не найдено.")
+            await update.effective_message.reply_text("Событие не найдено.")
             return
 
         if event.organizer_id != user_id:
-            await message.reply_text("Вы не можете удалить это событие.")
+            await update.effective_message.reply_text("Вы не можете редактировать это событие.")
             return
 
-        await session.delete(event)
+        if edit_stage == 'title':
+            event.title = update.message.text
+            context.user_data['edit_stage'] = 'description'
+            await update.effective_message.reply_text(f"Название изменено на: {event.title}. Теперь введите описание:")
+
+        elif edit_stage == 'description':
+            event.description = update.message.text
+            context.user_data['edit_stage'] = 'date'
+            await update.effective_message.reply_text(
+                f"Описание изменено на: {event.description}. Теперь введите дату:")
+
+        elif edit_stage == 'date':
+            event.date = update.message.text
+            await session.commit()
+            await update.effective_message.reply_text(f"Дата изменена на: {event.date}. Все изменения сохранены.")
+            context.user_data.clear()
+            return
+
         await session.commit()
-        await message.reply_text(f"Событие '{event.title}' было успешно удалено.")
