@@ -6,7 +6,6 @@ from sqlalchemy.exc import SQLAlchemyError
 from src.config.database_config import get_async_session
 from src.functionality.base.handlers import show_menu
 from src.models.database_models import User
-from src.functionality.user.schemes import UserSchema
 from src.utils.constants import WELCOME_TEXT, REGISTRATION_TEXT
 from src.utils.helpers import convert_telegram_id_to_uuid
 
@@ -26,13 +25,13 @@ async def start(
         if user and (user.first_name or user.last_name or user.age or user.experience):
             welcome_text = WELCOME_TEXT
             keyboard = [
-                [InlineKeyboardButton("Пропустить ввод данных", callback_data="skip_input")],
-                [InlineKeyboardButton("Редактировать профиль", callback_data="edit_profile")],
+                [InlineKeyboardButton("Skip data entry", callback_data="skip_input")],
+                [InlineKeyboardButton("Edit Profile", callback_data="edit_profile")],
             ]
         else:
             welcome_text = REGISTRATION_TEXT
             keyboard = [
-                [InlineKeyboardButton("Начать ввод данных", callback_data="start_input")],
+                [InlineKeyboardButton("Start data entry", callback_data="start_input")],
             ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -40,13 +39,16 @@ async def start(
     return FIRST_NAME
 
 
-async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def button_click(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> int:
     """Handle a button press to start data entry or skip."""
     query = update.callback_query
     await query.answer()
 
     if query.data == "start_input":
-        await query.edit_message_text(text="Введите ваше имя:")
+        await query.edit_message_text(text="Enter your first name:")
         context.user_data["field"] = "first_name"
         context.user_data["edit_mode"] = False
         return FIRST_NAME
@@ -55,17 +57,20 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         return await show_menu(update, context)
 
     elif query.data == "edit_profile":
-        await query.edit_message_text("Редактируем профиль. Введите новое имя:")
+        await query.edit_message_text("Editing profile. Enter your new first name:")
         context.user_data["field"] = "first_name"
         context.user_data["edit_mode"] = True
         return FIRST_NAME
 
 
-async def handle_input(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def handle_input(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+) -> int:
     """Processing user input."""
     field = context.user_data.get("field")
     if not field:
-        await update.message.reply_text("Ошибка: неизвестное поле.")
+        await update.message.reply_text("Error: unknown field.")
         return FIRST_NAME
 
     value = update.message.text
@@ -85,7 +90,7 @@ async def handle_input(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
                     value = int(value)
                 except ValueError:
                     await update.message.reply_text(
-                        f"Ошибка: поле '{field}' должно быть числом. Попробуйте снова."
+                        f"Error: the '{field}' field must be a number. Please try again."
                     )
                     return AGE if field == "age" else EXPERIENCE
 
@@ -94,37 +99,37 @@ async def handle_input(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
             if field == "first_name":
                 if edit_mode:
-                    await update.message.reply_text("Введите новую фамилию:")
+                    await update.message.reply_text("Enter your new last name:")
                 else:
-                    await update.message.reply_text("Введите вашу фамилию:")
+                    await update.message.reply_text("Enter your last name:")
                 context.user_data["field"] = "last_name"
                 return LAST_NAME
 
             if field == "last_name":
                 if edit_mode:
-                    await update.message.reply_text("Введите новый возраст:")
+                    await update.message.reply_text("Enter your new age:")
                 else:
-                    await update.message.reply_text("Введите ваш возраст:")
+                    await update.message.reply_text("Enter your age:")
                 context.user_data["field"] = "age"
                 return AGE
 
             if field == "age":
                 if edit_mode:
-                    await update.message.reply_text("Введите новый опыт работы:")
+                    await update.message.reply_text("Enter your new work experience:")
                 else:
-                    await update.message.reply_text("Введите ваш опыт работы:")
+                    await update.message.reply_text("Enter your work experience:")
                 context.user_data["field"] = "experience"
                 return EXPERIENCE
 
             if field == "experience":
                 if edit_mode:
-                    await update.message.reply_text("Ваш профиль обновлен. Выберите действие.")
+                    await update.message.reply_text("Your profile has been updated. Choose an action.")
                 else:
-                    await update.message.reply_text("Все данные введены. Теперь выберите действие.")
+                    await update.message.reply_text("All data has been entered. Now choose an action.")
                 return await show_menu(update, context)
 
         except (ValueError, SQLAlchemyError) as e:
-            await update.message.reply_text(f"Ошибка обработки данных: {e}")
+            await update.message.reply_text(f"Error processing data: {e}")
             await session.rollback()
 
     return FIRST_NAME
