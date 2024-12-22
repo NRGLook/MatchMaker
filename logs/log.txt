@@ -94,3 +94,17 @@ WHERE "user".id = $1::UUID]
 2024-12-16 12:54:06: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
 2024-12-16 12:55:15: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
 2024-12-16 12:56:25: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
+2024-12-16 13:58:26: INFO [MainThread] list_events_edit(242): list_events_edit: function call started
+2024-12-16 13:58:26: INFO [MainThread] list_events_edit(244): list_events_edit: converted user_id = 00000000-0000-4000-8000-00002853cf0f
+2024-12-16 13:58:26: INFO [MainThread] list_events_edit(255): list_events_edit: number of events found: 3
+2024-12-16 13:58:26: INFO [MainThread] list_events_edit(264): list_events_edit: keyboard: [[InlineKeyboardButton(callback_data='edit_377aa126-e347-4ef1-9141-6b696e44b82f', text='Hello World')], [InlineKeyboardButton(callback_data='edit_0c368c60-f95c-41af-a013-b85e547ca80b', text='Change noname')], [InlineKeyboardButton(callback_data='edit_9030ba29-35ac-4fc7-b9e2-401efa982329', text='Футбольный матч WS')]]
+2024-12-16 13:58:29: INFO [MainThread] handle_event_action(309): handle_event_action: function call started
+2024-12-16 13:58:29: INFO [MainThread] handle_event_action(316): handle_event_action: received data: action = edit, event_id = 377aa126-e347-4ef1-9141-6b696e44b82f
+2024-12-16 13:58:36: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
+2024-12-16 13:58:39: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
+2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
+2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(391): Attempting to save the date: 2022-10-10
+2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(397): Date before commit (event.date_time): 2022-10-10
+2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(407): Date successfully saved: 2022-10-10
+2024-12-16 13:58:47: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
+2024-12-16 15:06:39: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
