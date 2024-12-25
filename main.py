@@ -15,8 +15,8 @@ async def main():
     bot = Bot(token=settings.API_KEY)
     dp = Dispatcher()
 
-    dp.include_router(user_router)
     dp.include_router(menu_router)
+    dp.include_router(user_router)
     dp.include_router(settings_router)
 
     await dp.start_polling(bot)

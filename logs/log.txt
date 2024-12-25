@@ -80,3 +80,20 @@
 2024-12-25 07:42:20: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
 2024-12-25 07:42:24: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
 2024-12-25 07:42:58: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 08:12:13: INFO [MainThread] view_profile(167): view_profile triggered by user 676581135
+2024-12-25 08:12:13: INFO [MainThread] view_profile(200): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 08:16:11: INFO [MainThread] start(32): Processing /start command...
+2024-12-25 08:16:11: INFO [MainThread] start(51): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:16:11: INFO [MainThread] start(55): State set to FIRST_NAME for user 676581135
+2024-12-25 08:16:13: INFO [MainThread] button_click(62): Button click: skip_input, User: 676581135
+2024-12-25 08:16:13: INFO [MainThread] button_click(74): Skipping data input, showing menu
+2024-12-25 08:16:15: INFO [MainThread] button_click(62): Button click: skip_input, User: 676581135
+2024-12-25 08:16:15: INFO [MainThread] button_click(74): Skipping data input, showing menu
+2024-12-25 08:16:24: INFO [MainThread] button_click(62): Button click: skip_input, User: 676581135
+2024-12-25 08:16:24: INFO [MainThread] button_click(74): Skipping data input, showing menu
+2024-12-25 08:16:28: INFO [MainThread] button_click(62): Button click: view_feedback, User: 676581135
+2024-12-25 08:16:31: INFO [MainThread] start(32): Processing /start command...
+2024-12-25 08:16:31: INFO [MainThread] start(51): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:16:31: INFO [MainThread] start(55): State set to FIRST_NAME for user 676581135
+2024-12-25 08:16:34: INFO [MainThread] button_click(62): Button click: show_commands, User: 676581135
+2024-12-25 08:16:37: INFO [MainThread] button_click(62): Button click: clear, User: 676581135
