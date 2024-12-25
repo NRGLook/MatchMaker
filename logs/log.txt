@@ -1,110 +1,82 @@
-2024-12-14 12:52:30: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
-[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
-FROM "user" 
-WHERE "user".id = $1::UUID]
-[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2024-12-14 12:53:52: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
-[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
-FROM "user" 
-WHERE "user".id = $1::UUID]
-[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2024-12-14 12:58:58: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 12:59:04: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 12:59:06: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 12:59:07: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 16:11:38: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 16:11:43: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 16:11:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 18:11:07: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 18:27:32: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'answer'
-2024-12-14 18:54:59: WARNING [MainThread] get_async_session(28): Session rollback because of exception: name 'show_grid' is not defined
-2024-12-14 22:44:40: WARNING [MainThread] get_async_session(28): Session rollback because of exception: Textual SQL expression 'SELECT * FROM event WHERE...' should be explicitly declared as text('SELECT * FROM event WHERE...')
-2024-12-14 22:54:12: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-14 22:54:15: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 08:34:25: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 09:28:43: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'title' is an invalid keyword argument for Event
-2024-12-15 09:28:50: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 09:52:57: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 10:02:38: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 10:05:25: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 10:05:27: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 10:05:27: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 10:08:53: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 10:08:56: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 10:18:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 16:08:35: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 16:08:36: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 16:09:49: WARNING [MainThread] get_async_session(28): Session rollback because of exception: 'NoneType' object has no attribute 'reply_text'
-2024-12-15 16:22:20: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.DataError'>: invalid input for query argument $1: 'input' (invalid UUID 'input': length must be between 32..36 characters, got 5)
-[SQL: SELECT event.title AS event_title, event.category_id AS event_category_id, event.location AS event_location, event.people_amount AS event_people_amount, event.experience AS event_experience, event.date_time AS event_date_time, event.organizer_id AS event_organizer_id, event.description AS event_description, event.created_at AS event_created_at, event.updated_at AS event_updated_at, event.id AS event_id 
-FROM event 
-WHERE event.id = $1::UUID]
-[parameters: ('input',)]
-(Background on this error at: https://sqlalche.me/e/20/dbapi)
-2024-12-15 22:49:21: WARNING [MainThread] get_async_session(28): Session rollback because of exception: [WinError 1225] The remote computer refused the network connection
-2024-12-15 22:49:40: WARNING [MainThread] get_async_session(28): Session rollback because of exception: [WinError 1225] The remote computer refused the network connection
-2024-12-15 23:27:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
-[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
-FROM "user" 
-WHERE "user".id = $1::UUID]
-[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2024-12-15 23:27:45: WARNING [MainThread] get_async_session(28): Session rollback because of exception: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "user" does not exist
-[SQL: SELECT "user".username AS user_username, "user".role AS user_role, "user".first_name AS user_first_name, "user".last_name AS user_last_name, "user".age AS user_age, "user".experience AS user_experience, "user".created_at AS user_created_at, "user".updated_at AS user_updated_at, "user".id AS user_id 
-FROM "user" 
-WHERE "user".id = $1::UUID]
-[parameters: (UUID('00000000-0000-4000-8000-00002853cf0f'),)]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2024-12-15 23:32:21: WARNING [MainThread] get_async_session(28): Session rollback because of exception: Textual SQL expression 'SELECT id, title FROM eve...' should be explicitly declared as text('SELECT id, title FROM eve...')
-2024-12-15 23:32:33: WARNING [MainThread] get_async_session(28): Session rollback because of exception: Textual SQL expression 'SELECT id, title FROM eve...' should be explicitly declared as text('SELECT id, title FROM eve...')
-2024-12-16 12:24:23: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:25:39: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:26:07: INFO [MainThread] list_events_edit(242): list_events_edit: function call started
-2024-12-16 12:26:07: INFO [MainThread] list_events_edit(244): list_events_edit: converted user_id = 00000000-0000-4000-8000-00002853cf0f
-2024-12-16 12:26:07: INFO [MainThread] list_events_edit(255): list_events_edit: number of events found: 2
-2024-12-16 12:26:07: INFO [MainThread] list_events_edit(264): list_events_edit: keyboard: [[InlineKeyboardButton(callback_data='edit_cc22df53-9cda-4204-b535-6b98bec90db1', text='Мозгобойня WS начало')], [InlineKeyboardButton(callback_data='edit_9030ba29-35ac-4fc7-b9e2-401efa982329', text='Футбольный матч WS')]]
-2024-12-16 12:26:15: INFO [MainThread] list_events_delete(277): list_events_delete: function call started
-2024-12-16 12:26:15: INFO [MainThread] list_events_delete(279): list_events_delete: converted user_id = 00000000-0000-4000-8000-00002853cf0f
-2024-12-16 12:26:15: INFO [MainThread] list_events_delete(290): list_events_delete: number of events found: 2
-2024-12-16 12:26:18: INFO [MainThread] handle_event_action(309): handle_event_action: function call started
-2024-12-16 12:26:18: INFO [MainThread] handle_event_action(316): handle_event_action: received data: action = delete, event_id = cc22df53-9cda-4204-b535-6b98bec90db1
-2024-12-16 12:26:37: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:29:34: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:32:16: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:45:02: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:45:18: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:45:42: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:50:44: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:51:01: INFO [MainThread] handle_event_action(309): handle_event_action: function call started
-2024-12-16 12:51:01: INFO [MainThread] handle_event_action(316): handle_event_action: received data: action = edit, event_id = e6055dae-bbe8-4654-9099-f82e3de1e13b
-2024-12-16 12:53:25: INFO [MainThread] list_events_edit(242): list_events_edit: function call started
-2024-12-16 12:53:25: INFO [MainThread] list_events_edit(244): list_events_edit: converted user_id = 00000000-0000-4000-8000-00002853cf0f
-2024-12-16 12:53:25: INFO [MainThread] list_events_edit(255): list_events_edit: number of events found: 3
-2024-12-16 12:53:25: INFO [MainThread] list_events_edit(264): list_events_edit: keyboard: [[InlineKeyboardButton(callback_data='edit_377aa126-e347-4ef1-9141-6b696e44b82f', text='Hello World')], [InlineKeyboardButton(callback_data='edit_0c368c60-f95c-41af-a013-b85e547ca80b', text='fdff')], [InlineKeyboardButton(callback_data='edit_9030ba29-35ac-4fc7-b9e2-401efa982329', text='Футбольный матч WS')]]
-2024-12-16 12:53:27: INFO [MainThread] handle_event_action(309): handle_event_action: function call started
-2024-12-16 12:53:27: INFO [MainThread] handle_event_action(316): handle_event_action: received data: action = edit, event_id = 0c368c60-f95c-41af-a013-b85e547ca80b
-2024-12-16 12:53:35: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:53:44: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:53:49: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:53:49: INFO [MainThread] handle_event_edit(391): Attempting to save the date: 2022-10-10
-2024-12-16 12:53:49: INFO [MainThread] handle_event_edit(397): Date before commit (event.date_time): 2022-10-10
-2024-12-16 12:53:49: INFO [MainThread] handle_event_edit(407): Date successfully saved: 2022-10-10
-2024-12-16 12:54:06: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:55:15: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 12:56:25: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 13:58:26: INFO [MainThread] list_events_edit(242): list_events_edit: function call started
-2024-12-16 13:58:26: INFO [MainThread] list_events_edit(244): list_events_edit: converted user_id = 00000000-0000-4000-8000-00002853cf0f
-2024-12-16 13:58:26: INFO [MainThread] list_events_edit(255): list_events_edit: number of events found: 3
-2024-12-16 13:58:26: INFO [MainThread] list_events_edit(264): list_events_edit: keyboard: [[InlineKeyboardButton(callback_data='edit_377aa126-e347-4ef1-9141-6b696e44b82f', text='Hello World')], [InlineKeyboardButton(callback_data='edit_0c368c60-f95c-41af-a013-b85e547ca80b', text='Change noname')], [InlineKeyboardButton(callback_data='edit_9030ba29-35ac-4fc7-b9e2-401efa982329', text='Футбольный матч WS')]]
-2024-12-16 13:58:29: INFO [MainThread] handle_event_action(309): handle_event_action: function call started
-2024-12-16 13:58:29: INFO [MainThread] handle_event_action(316): handle_event_action: received data: action = edit, event_id = 377aa126-e347-4ef1-9141-6b696e44b82f
-2024-12-16 13:58:36: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 13:58:39: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(391): Attempting to save the date: 2022-10-10
-2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(397): Date before commit (event.date_time): 2022-10-10
-2024-12-16 13:58:44: INFO [MainThread] handle_event_edit(407): Date successfully saved: 2022-10-10
-2024-12-16 13:58:47: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
-2024-12-16 15:06:39: INFO [MainThread] handle_event_edit(354): handle_event_edit: function call started
+2024-12-25 00:07:51: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:04:18: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:04:53: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:07:13: INFO [MainThread] view_profile_command(25): View profile requested by 676581135
+2024-12-25 07:07:15: INFO [MainThread] edit_profile_command(46): Edit profile triggered by 676581135
+2024-12-25 07:07:18: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:07:23: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:08:40: INFO [MainThread] view_profile_command(25): View profile requested by 676581135
+2024-12-25 07:11:36: INFO [MainThread] start(26): Processing /start command by 676581135
+2024-12-25 07:13:58: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:13:58: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:13:59: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:14:00: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:14:00: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:14:01: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:14:01: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:14:03: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:14:03: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:15:16: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:15:16: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:15:17: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:15:17: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:15:17: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:15:18: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:15:19: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:15:19: INFO [MainThread] view_profile(292): view_profile triggered by user 676581135
+2024-12-25 07:15:19: INFO [MainThread] view_profile(325): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:29:20: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:29:20: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:29:21: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:29:22: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:29:22: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:29:22: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:29:23: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:29:23: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:29:24: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:29:24: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:29:24: INFO [MainThread] view_profile(292): view_profile triggered by user 676581135
+2024-12-25 07:29:24: INFO [MainThread] view_profile(325): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:29:29: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:29:29: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:29:29: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:29:30: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:29:30: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:29:31: INFO [MainThread] button_click(172): Button click: edit_profile, User: 676581135
+2024-12-25 07:29:31: INFO [MainThread] button_click(192): State set to FIRST_NAME for profile editing
+2024-12-25 07:29:35: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:29:38: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:29:41: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:29:42: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:29:46: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:40:04: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:40:04: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:40:04: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:40:05: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:40:05: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:40:06: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:40:06: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:40:06: INFO [MainThread] view_profile(292): view_profile triggered by user 676581135
+2024-12-25 07:40:06: INFO [MainThread] view_profile(325): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:42:03: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:42:04: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:42:04: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:42:05: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:42:06: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:42:06: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:42:06: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:42:06: INFO [MainThread] view_profile(277): view_profile triggered by user 676581135
+2024-12-25 07:42:07: INFO [MainThread] view_profile(310): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:42:08: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:42:08: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:42:08: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:42:09: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:42:09: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:42:10: INFO [MainThread] button_click(172): Button click: edit_profile, User: 676581135
+2024-12-25 07:42:10: INFO [MainThread] button_click(192): State set to FIRST_NAME for profile editing
+2024-12-25 07:42:13: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:42:16: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:42:18: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:42:20: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:42:24: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:42:58: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
