@@ -1,0 +1,243 @@
+2024-12-25 00:07:51: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:04:18: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:04:53: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:07:13: INFO [MainThread] view_profile_command(25): View profile requested by 676581135
+2024-12-25 07:07:15: INFO [MainThread] edit_profile_command(46): Edit profile triggered by 676581135
+2024-12-25 07:07:18: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:07:23: WARNING [MainThread] get_async_session(29): Session rollback because of exception: attribute name must be string, not 'NoneType'
+2024-12-25 07:08:40: INFO [MainThread] view_profile_command(25): View profile requested by 676581135
+2024-12-25 07:11:36: INFO [MainThread] start(26): Processing /start command by 676581135
+2024-12-25 07:13:58: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:13:58: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:13:59: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:14:00: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:14:00: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:14:01: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:14:01: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:14:03: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:14:03: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:15:16: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:15:16: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:15:17: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:15:17: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:15:17: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:15:18: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:15:19: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:15:19: INFO [MainThread] view_profile(292): view_profile triggered by user 676581135
+2024-12-25 07:15:19: INFO [MainThread] view_profile(325): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:29:20: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:29:20: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:29:21: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:29:22: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:29:22: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:29:22: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:29:23: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:29:23: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:29:24: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:29:24: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:29:24: INFO [MainThread] view_profile(292): view_profile triggered by user 676581135
+2024-12-25 07:29:24: INFO [MainThread] view_profile(325): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:29:29: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:29:29: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:29:29: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:29:30: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:29:30: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:29:31: INFO [MainThread] button_click(172): Button click: edit_profile, User: 676581135
+2024-12-25 07:29:31: INFO [MainThread] button_click(192): State set to FIRST_NAME for profile editing
+2024-12-25 07:29:35: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:29:38: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:29:41: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:29:42: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:29:46: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:40:04: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:40:04: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:40:04: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:40:05: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:40:05: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:40:06: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:40:06: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:40:06: INFO [MainThread] view_profile(292): view_profile triggered by user 676581135
+2024-12-25 07:40:06: INFO [MainThread] view_profile(325): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:42:03: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:42:04: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:42:04: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:42:05: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:42:06: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:42:06: INFO [MainThread] button_click(172): Button click: view_profile, User: 676581135
+2024-12-25 07:42:06: INFO [MainThread] button_click(196): Viewing profile
+2024-12-25 07:42:06: INFO [MainThread] view_profile(277): view_profile triggered by user 676581135
+2024-12-25 07:42:07: INFO [MainThread] view_profile(310): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 07:42:08: INFO [MainThread] start(142): Processing /start command...
+2024-12-25 07:42:08: INFO [MainThread] start(161): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 07:42:08: INFO [MainThread] start(165): State set to FIRST_NAME for user 676581135
+2024-12-25 07:42:09: INFO [MainThread] button_click(172): Button click: skip_input, User: 676581135
+2024-12-25 07:42:09: INFO [MainThread] button_click(184): Skipping data input, showing menu
+2024-12-25 07:42:10: INFO [MainThread] button_click(172): Button click: edit_profile, User: 676581135
+2024-12-25 07:42:10: INFO [MainThread] button_click(192): State set to FIRST_NAME for profile editing
+2024-12-25 07:42:13: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:42:16: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:42:18: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 07:42:20: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:42:24: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 07:42:58: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'message'
+2024-12-25 08:12:13: INFO [MainThread] view_profile(167): view_profile triggered by user 676581135
+2024-12-25 08:12:13: INFO [MainThread] view_profile(200): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 08:16:11: INFO [MainThread] start(32): Processing /start command...
+2024-12-25 08:16:11: INFO [MainThread] start(51): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:16:11: INFO [MainThread] start(55): State set to FIRST_NAME for user 676581135
+2024-12-25 08:16:13: INFO [MainThread] button_click(62): Button click: skip_input, User: 676581135
+2024-12-25 08:16:13: INFO [MainThread] button_click(74): Skipping data input, showing menu
+2024-12-25 08:16:15: INFO [MainThread] button_click(62): Button click: skip_input, User: 676581135
+2024-12-25 08:16:15: INFO [MainThread] button_click(74): Skipping data input, showing menu
+2024-12-25 08:16:24: INFO [MainThread] button_click(62): Button click: skip_input, User: 676581135
+2024-12-25 08:16:24: INFO [MainThread] button_click(74): Skipping data input, showing menu
+2024-12-25 08:16:28: INFO [MainThread] button_click(62): Button click: view_feedback, User: 676581135
+2024-12-25 08:16:31: INFO [MainThread] start(32): Processing /start command...
+2024-12-25 08:16:31: INFO [MainThread] start(51): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:16:31: INFO [MainThread] start(55): State set to FIRST_NAME for user 676581135
+2024-12-25 08:16:34: INFO [MainThread] button_click(62): Button click: show_commands, User: 676581135
+2024-12-25 08:16:37: INFO [MainThread] button_click(62): Button click: clear, User: 676581135
+2024-12-25 08:31:45: INFO [MainThread] start(32): Processing /start command...
+2024-12-25 08:31:45: INFO [MainThread] start(51): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:31:45: INFO [MainThread] start(55): State set to FIRST_NAME for user 676581135
+2024-12-25 08:37:38: INFO [MainThread] start(29): Processing /start command...
+2024-12-25 08:37:38: INFO [MainThread] start(48): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:37:38: INFO [MainThread] start(52): State set to FIRST_NAME for user 676581135
+2024-12-25 08:48:49: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 08:48:49: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:48:49: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 08:50:23: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 08:50:23: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:50:23: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 08:55:56: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 08:55:56: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:55:56: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 08:57:40: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 08:57:40: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 08:57:41: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 08:57:41: INFO [MainThread] button_click(60): Button click: skip_input, User: 676581135
+2024-12-25 08:57:41: INFO [MainThread] button_click(72): Skipping data input, showing menu
+2024-12-25 08:57:49: INFO [MainThread] button_click(60): Button click: edit_profile, User: 676581135
+2024-12-25 08:57:49: INFO [MainThread] button_click(80): State set to FIRST_NAME for profile editing
+2024-12-25 09:32:37: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 09:32:37: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 09:32:38: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 09:32:39: INFO [MainThread] button_click(60): Button click: skip_input, User: 676581135
+2024-12-25 09:32:39: INFO [MainThread] button_click(72): Skipping data input, showing menu
+2024-12-25 09:40:01: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 09:40:01: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 09:40:01: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 09:40:03: INFO [MainThread] button_click(60): Button click: skip_input, User: 676581135
+2024-12-25 09:40:03: INFO [MainThread] button_click(72): Skipping data input, showing menu
+2024-12-25 09:41:15: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 09:41:15: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 09:41:15: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 09:41:16: INFO [MainThread] button_click(60): Button click: skip_input, User: 676581135
+2024-12-25 09:41:16: INFO [MainThread] button_click(72): Skipping data input, showing menu
+2024-12-25 09:41:19: INFO [MainThread] button_click(60): Button click: view_profile, User: 676581135
+2024-12-25 09:41:19: INFO [MainThread] button_click(84): Viewing profile
+2024-12-25 09:41:19: INFO [MainThread] view_profile(188): view_profile triggered by user 676581135
+2024-12-25 09:41:20: INFO [MainThread] view_profile(221): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 09:41:24: INFO [MainThread] button_click(60): Button click: edit_profile, User: 676581135
+2024-12-25 09:41:24: INFO [MainThread] button_click(80): State set to FIRST_NAME for profile editing
+2024-12-25 09:41:28: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 09:41:31: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 09:41:33: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 09:41:34: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'callback_query'
+2024-12-25 09:41:39: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'callback_query'
+2024-12-25 09:41:43: WARNING [MainThread] get_async_session(29): Session rollback because of exception: show_menu() got an unexpected keyword argument 'callback_query'
+2024-12-25 09:41:50: INFO [MainThread] button_click(60): Button click: view_profile, User: 676581135
+2024-12-25 09:41:51: INFO [MainThread] button_click(84): Viewing profile
+2024-12-25 09:41:51: INFO [MainThread] view_profile(188): view_profile triggered by user 676581135
+2024-12-25 09:41:51: INFO [MainThread] view_profile(221): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 09:42:28: INFO [MainThread] button_click(60): Button click: show_commands, User: 676581135
+2024-12-25 09:43:09: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 09:43:09: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 09:43:09: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 09:43:11: INFO [MainThread] button_click(60): Button click: skip_input, User: 676581135
+2024-12-25 09:43:11: INFO [MainThread] button_click(72): Skipping data input, showing menu
+2024-12-25 09:43:13: INFO [MainThread] button_click(60): Button click: show_commands, User: 676581135
+2024-12-25 12:46:41: INFO [MainThread] start(30): Processing /start command...
+2024-12-25 12:46:41: INFO [MainThread] start(49): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 12:46:42: INFO [MainThread] start(53): State set to FIRST_NAME for user 676581135
+2024-12-25 12:46:45: INFO [MainThread] button_click(60): Button click: skip_input, User: 676581135
+2024-12-25 12:46:45: INFO [MainThread] button_click(72): Skipping data input, showing menu
+2024-12-25 12:46:59: INFO [MainThread] button_click(60): Button click: edit_profile, User: 676581135
+2024-12-25 12:46:59: INFO [MainThread] button_click(80): State set to FIRST_NAME for profile editing
+2024-12-25 12:47:10: WARNING [MainThread] get_async_session(29): Session rollback because of exception: 'State' object has no attribute 'set'
+2024-12-25 12:47:14: INFO [MainThread] button_click(60): Button click: view_profile, User: 676581135
+2024-12-25 12:47:14: INFO [MainThread] button_click(84): Viewing profile
+2024-12-25 12:47:14: INFO [MainThread] view_profile(188): view_profile triggered by user 676581135
+2024-12-25 12:47:14: INFO [MainThread] view_profile(221): Profile displayed for user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 12:54:38: INFO [MainThread] button_click(60): Button click: show_commands, User: 676581135
+2024-12-25 17:19:57: INFO [MainThread] start(29): Processing /start command...
+2024-12-25 17:19:57: INFO [MainThread] start(48): Sending welcome text: Hi! You've already filled in some of the data. Do you want to update the information or skip steps?
+2024-12-25 17:20:45: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 17:21:07: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:07:54: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:08:23: INFO [MainThread] user_experience(128): User 00000000-0000-4000-8000-00002853cf0f registered or updated.
+2024-12-25 20:09:50: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:10:18: INFO [MainThread] team_logo_url(102): Team 8b9d8ac6-2312-49cb-8c60-bdbb44e03f69 created by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:15:18: INFO [MainThread] event_experience(166): Event 9bb5d958-0be9-4953-816b-4d94aba9bd3d created by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:20:08: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:20:08: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:20:09: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:20:46: INFO [MainThread] delete_event(236): Event 0c368c60-f95c-41af-a013-b85e547ca80b deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:20:53: INFO [MainThread] delete_event(236): Event 9bb5d958-0be9-4953-816b-4d94aba9bd3d deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:21:16: INFO [MainThread] delete_event(236): Event 0c368c60-f95c-41af-a013-b85e547ca80b deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:23:52: INFO [MainThread] delete_event(236): Event 9bb5d958-0be9-4953-816b-4d94aba9bd3d deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:26:38: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:26:52: INFO [MainThread] delete_event(237): Event 9bb5d958-0be9-4953-816b-4d94aba9bd3d deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:27:16: INFO [MainThread] delete_event(237): Event 0c368c60-f95c-41af-a013-b85e547ca80b deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 20:34:53: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:35:55: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:38:09: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:38:09: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:45:08: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 20:45:51: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:00:36: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:28:25: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:28:41: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:31:51: INFO [MainThread] delete_event(239): Event 377aa126-e347-4ef1-9141-6b696e44b82f deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:32:44: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:32:49: INFO [MainThread] delete_event(239): Event 377aa126-e347-4ef1-9141-6b696e44b82f deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:33:52: INFO [MainThread] delete_event(239): Event 377aa126-e347-4ef1-9141-6b696e44b82f deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:36:24: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:36:35: INFO [MainThread] delete_event(237): Event 377aa126-e347-4ef1-9141-6b696e44b82f deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:42:07: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:42:18: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:45:51: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:52:33: INFO [MainThread] save_feedback(43): Feedback 72c72560-be15-4aaf-8bd5-4401e285f7f9 created by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:54:30: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:54:50: INFO [MainThread] save_feedback(52): Feedback 95bcade1-7c06-4390-bbdb-27439d9932f7 created by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:58:35: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:58:43: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 21:58:56: INFO [MainThread] team_logo_url(107): Team 61e5114d-45f9-4a40-860f-79345dee564d created by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:59:32: INFO [MainThread] team_logo_url(95): Team 8b9d8ac6-2312-49cb-8c60-bdbb44e03f69 updated by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:59:44: INFO [MainThread] delete_team(182): Team e6055dae-bbe8-4654-9099-f82e3de1e13b deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 21:59:55: INFO [MainThread] delete_team(182): Team 61e5114d-45f9-4a40-860f-79345dee564d deleted by user 00000000-0000-4000-8000-00002853cf0f
+2024-12-25 22:03:05: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 22:03:42: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 22:06:45: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 22:06:48: INFO [MainThread] handle_rsvp(255): Received callback_data: rsvp_accept_9030ba29-35ac-4fc7-b9e2-401efa982329
+2024-12-25 22:06:48: WARNING [MainThread] handle_rsvp(263): Invalid event ID format: accept_9030ba29-35ac-4fc7-b9e2-401efa982329
+2024-12-25 22:22:44: INFO [MainThread] register_user(29): Processing /start command...
+2024-12-25 22:26:20: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 22:26:24: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:17:31: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:17:31: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:17:31: WARNING [MainThread] get_async_session(29): Session rollback because of exception: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:17:31: WARNING [MainThread] get_async_session(29): Session rollback because of exception: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Link(invitation_link)]'. Original exception was: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:17:37: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:17:37: WARNING [MainThread] get_async_session(29): Session rollback because of exception: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Link(invitation_link)]'. Original exception was: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:18:16: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:18:16: WARNING [MainThread] get_async_session(29): Session rollback because of exception: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Link(invitation_link)]'. Original exception was: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:19:15: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:19:15: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:19:15: WARNING [MainThread] get_async_session(29): Session rollback because of exception: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:19:15: WARNING [MainThread] get_async_session(29): Session rollback because of exception: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Link(invitation_link)]'. Original exception was: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:22:25: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:22:25: WARNING [MainThread] get_async_session(29): Session rollback because of exception: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:24:26: INFO [MainThread] register_user(30): Processing /start command...
+2024-12-25 23:24:26: WARNING [MainThread] get_async_session(29): Session rollback because of exception: Error creating backref 'feedbacks' on relationship 'Link.user': property of that name exists on mapper 'Mapper[User(user)]'
+2024-12-25 23:25:22: INFO [MainThread] register_user(30): Processing /start command...
