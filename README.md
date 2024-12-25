@@ -21,7 +21,7 @@
 - **Comprehensive Management:** From creating events to tracking statistics, MatchMaker covers all aspects of sports event management.
 - **User-Friendly:** Intuitive design ensures that users of all levels can navigate and use the platform with ease.
 - **Scalable:** Suitable for both small amateur gatherings and large-scale professional tournaments.
-- 
+
 
 ## Getting Started
 
