@@ -6,7 +6,6 @@
 
 ## Key Features
 
-
 - **Event Creation:** Easily set up sports events and virtual tournaments with just a few clicks.
 - **User Registration:** Simplified registration process for participants, whether they are gamers or sports enthusiasts.
 - **Invitation Management:** Send out invitations and track RSVPs seamlessly within Telegram.
