@@ -24,8 +24,6 @@
 
 ## Getting Started
 
-
-
 1. **Add MatchMaker Bot to Telegram:** Search for @MatchMakerBot and start a conversation.
 2. **Create an Event:** Use the intuitive commands to set up your sports match or virtual tournament.
 3. **Invite Participants:** Send out invitations and manage RSVPs directly through the bot.
