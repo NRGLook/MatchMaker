@@ -14,6 +14,7 @@
 - **Statistics & Ratings:** Access built-in tools to monitor and analyze the performance of participants and teams.
 - **Flexible for All Users:** Whether you’re a professional organizer, a sports club, or a casual participant, MatchMaker adapts to your needs.
 
+
 ## Why Choose MatchMaker?
 
 - **Convenience:** Manage all your sports events and tournaments without leaving Telegram.
@@ -21,6 +22,7 @@
 - **Comprehensive Management:** From creating events to tracking statistics, MatchMaker covers all aspects of sports event management.
 - **User-Friendly:** Intuitive design ensures that users of all levels can navigate and use the platform with ease.
 - **Scalable:** Suitable for both small amateur gatherings and large-scale professional tournaments.
+
 
 ## Getting Started
 
@@ -36,9 +38,10 @@ Whether you're organizing a local football match, a community esports tournament
 
 ---
 
+
 **Connect with Us:**
 
-- **Telegram:** [@MatchMakerBot](https://t.me/MatchMakerBot)
+- **Telegram:** [@MatchMakerBot](https://t.me/@MatchMaking_P_I_Bot)
 - **GitHub:** [github.com/MatchMaker](https://github.com/NRGLook/MatchMaker)
 - **Contact:** contact_matchmaker@gmail.com
 
