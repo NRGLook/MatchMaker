@@ -217,3 +217,20 @@ class Statistic(Base, TimestampMixin, IDMixin):
 
     user: Mapped[User] = relationship("User", backref="statistics")
     event: Mapped[Event] = relationship("Event", backref="statistics")
+
+
+class Feedback(Base, TimestampMixin, IDMixin):
+    __tablename__ = 'feedback'
+
+    user_id: Mapped[UUID] = mapped_column(
+        ForeignKey('user.id', ondelete="CASCADE"),
+        nullable=False,
+        comment="ID of the user who left the feedback"
+    )
+    text: Mapped[str] = mapped_column(
+        Text,
+        nullable=False,
+        comment="Text of the feedback"
+    )
+
+    user: Mapped[User] = relationship("User", backref="feedbacks")
