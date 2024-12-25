@@ -58,10 +58,11 @@ async def register_user(message: types.Message, state: FSMContext):
             builder.adjust(2)
 
             await message.answer("Choose an action:", reply_markup=builder.as_markup())
-
+            await state.clear()
         else:
             await message.answer("Welcome! Let's start your registration. Please enter your first name:")
             await state.set_state(UserStates.FIRST_NAME)
+
 
 
 @user_router.message(UserStates.FIRST_NAME)
@@ -141,26 +142,6 @@ async def edit_user(callback: types.CallbackQuery, state: FSMContext):
     """Edit user profile."""
     await callback.message.answer("Welcome! Let's edit your registration. Please enter your first name:")
     await state.set_state(UserStates.FIRST_NAME)
-
-
-@user_router.callback_query(F.data.startswith("edit_"))
-async def handle_edit_action(callback: types.CallbackQuery, state: FSMContext):
-    """Handle specific edit actions."""
-    field = callback.data.split("_")[1]
-    field_map = {
-        "first_name": "first name",
-        "last_name": "last name",
-        "age": "age",
-        "experience": "work experience",
-    }
-
-    if field not in field_map:
-        await callback.answer("Unknown action.")
-        return
-
-    await callback.message.edit_text(f"Enter your new {field_map[field]}:")
-    await state.update_data(field=field, edit_mode=True)
-    await state.set_state(getattr(UserStates, field.upper()))
 
 
 @user_router.callback_query(F.data == "view_profile")

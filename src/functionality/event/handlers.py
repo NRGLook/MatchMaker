@@ -1,4 +1,5 @@
 from datetime import datetime
+from uuid import UUID
 
 from aiogram import Router, types, F
 from aiogram.filters import Command, StateFilter
@@ -7,7 +8,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from src.config.database_config import get_async_session
-from src.models.database_models import Event, User, Category
+from src.models.database_models import Event, User, Category, RSVP
 from src.services.logger import LoggerProvider
 from src.utils.helpers import convert_telegram_id_to_uuid
 
@@ -22,6 +23,7 @@ log = LoggerProvider().get_logger(__name__)
 class EventStates(StatesGroup):
     TITLE = State()
     EDIT_TITLE = State()
+    DELETE_EVENT = State()
     LOCATION = State()
     CATEGORY = State()
     DATE = State()
@@ -172,8 +174,9 @@ async def event_experience(message: types.Message, state: FSMContext):
         await message.answer("Invalid experience. Please enter a valid number.")
 
 @event_router.callback_query(F.data == "edit_event")
-async def edit_event(callback: types.CallbackQuery, state: FSMContext):
+async def edit_my_event(callback: types.CallbackQuery, state: FSMContext):
     """Starts editing an existing event"""
+    
     async with get_async_session() as session:
         user_id = convert_telegram_id_to_uuid(callback.message.chat.id)
         result = await session.execute(select(Event).where(Event.organizer_id == user_id))
@@ -200,3 +203,59 @@ async def edit_event_title(callback: types.CallbackQuery, state: FSMContext):
     await state.update_data(change_event=True)
     await state.update_data(event_id=callback.data)
     await state.set_state(EventStates.TITLE)
+
+@event_router.callback_query(F.data == "delete_event")
+async def delete_my_event(callback: types.CallbackQuery, state: FSMContext):
+    """Starts delete an existing event"""
+    async with get_async_session() as session:
+        user_id = convert_telegram_id_to_uuid(callback.message.chat.id)
+        result = await session.execute(select(Event).where(Event.organizer_id == user_id))
+        events = result.scalars().all()
+
+        if not events:
+            await callback.message.answer("You don't have any events to edit.")
+            await callback.answer()
+
+        builder = InlineKeyboardBuilder()
+
+        for event in events:
+            builder.button(text=event.title, callback_data=f"{event.id}")
+        builder.adjust(2)
+        await callback.message.edit_text("Choose an event to delete:", reply_markup=builder.as_markup())
+        await state.set_state(EventStates.DELETE_EVENT)
+
+@event_router.callback_query(EventStates.DELETE_EVENT)
+async def delete_event(callback: types.CallbackQuery, state: FSMContext):
+    """Confirm the deletion of the event."""
+    await callback.answer()
+    event_id = callback.data
+
+    async with get_async_session() as session:
+        event = await session.get(Event, event_id)
+        if event:
+            await session.delete(event)
+            await session.commit()
+            log.info(f"Event {event_id} deleted by user {convert_telegram_id_to_uuid(callback.message.chat.id)}")
+            await callback.message.edit_text("Event deleted successfully!")
+            await state.clear()
+        else:
+            await callback.message.edit_text("Event not found. Please try again.")
+
+
+@event_router.callback_query(F.data == "view_events")
+async def view_events(callback: types.CallbackQuery, state: FSMContext):
+    """Starts viewing all events."""
+    await callback.answer()
+    await callback.message.edit_text("Viewing all events:")
+    async with get_async_session() as session:
+        events = await session.execute(select(Event))
+        events = events.scalars().all()
+        message_text = ""
+        if not events:
+            await callback.message.answer("No events found.")
+        builder = InlineKeyboardBuilder()
+
+        for index, event in enumerate(events, start=1):
+            message_text += f"{index}. {event.title}\n{event.description}\n{event.experience}\n\n"
+        await callback.message.answer(message_text)
+        await state.clear()
