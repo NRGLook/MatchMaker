@@ -3,11 +3,23 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-router = Router()
+from src.config.app_config import settings
+from src.functionality.settings.handlers import show_commands_command
 
-@router.message(Command("menu"))
-async def show_menu(message: types.Message, state: FSMContext):
-    """Opening the main menu."""
+menu_router = Router()
+
+
+@menu_router.message(Command("menu"))
+async def show_menu(
+    message: types.Message,
+    state: FSMContext,
+):
+    """Opening the main menu and managing user state."""
+
+    user_data = await state.get_data()
+    if not user_data:
+        await state.update_data(opened_menu=True)
+
     builder = InlineKeyboardBuilder()
 
     builder.button(text="View Profile", callback_data="view_profile")
@@ -16,6 +28,10 @@ async def show_menu(message: types.Message, state: FSMContext):
     builder.button(text="View Events", callback_data="view_events")
     builder.button(text="Edit Event", callback_data="edit_event")
     builder.button(text="Delete Event", callback_data="delete_event")
+    builder.button(text="Create RSVP", callback_data="create_rsvp")
+    builder.button(text="View RSVP", callback_data="view_rsvp")
+    builder.button(text="Edit RSVP", callback_data="edit_rsvp")
+    builder.button(text="Delete RSVP", callback_data="delete_rsvp")
     builder.button(text="Create Team", callback_data="create_team")
     builder.button(text="View Teams", callback_data="view_teams")
     builder.button(text="Edit Team", callback_data="edit_team")

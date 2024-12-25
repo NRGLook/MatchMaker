@@ -1,33 +1,30 @@
-import logging
-
-from aiogram import Router, types
+from aiogram import Router, types, F
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from sqlalchemy.exc import SQLAlchemyError
-
 from src.config.database_config import get_async_session
-from src.functionality.base.handlers import show_menu
 from src.models.database_models import User
-from src.utils.constants import WELCOME_TEXT, REGISTRATION_TEXT
-from src.utils.helpers import convert_telegram_id_to_uuid
 from src.services.logger import LoggerProvider
+from src.utils.helpers import convert_telegram_id_to_uuid
+from sqlalchemy.exc import SQLAlchemyError
+from src.utils.constants import WELCOME_TEXT, REGISTRATION_TEXT
 
-router = Router()
-
+user_router = Router()
 logger = LoggerProvider().get_logger(__name__)
 
-class UserProfileStates(StatesGroup):
+
+class UserStates(StatesGroup):
     FIRST_NAME = State()
     LAST_NAME = State()
     AGE = State()
     EXPERIENCE = State()
 
-@router.message(Command("start"))
-async def start(message: types.Message, state: FSMContext):
-    """Начальное приветствие с кнопками."""
+
+@user_router.message(Command("start"))
+async def register_user(message: types.Message, state: FSMContext):
+    """Start user registration."""
     print("Received /start command")
     logger.info("Processing /start command...")
     user_id = convert_telegram_id_to_uuid(message.from_user.id)
@@ -36,145 +33,145 @@ async def start(message: types.Message, state: FSMContext):
     async with get_async_session() as session:
         user = await session.get(User, user_id)
         print(f"User retrieved: {user}")
-        builder = InlineKeyboardBuilder()
-
         if user and (user.first_name or user.last_name or user.age or user.experience):
-            welcome_text = WELCOME_TEXT
-            builder.button(text="Skip data entry", callback_data="skip_input")
+            builder = InlineKeyboardBuilder()
+            builder.button(text="View Profile", callback_data="view_profile")
             builder.button(text="Edit Profile", callback_data="edit_profile")
+            builder.button(text="Create Event", callback_data="create_event")
+            builder.button(text="View Events", callback_data="view_events")
+            builder.button(text="Edit Event", callback_data="edit_event")
+            builder.button(text="Delete Event", callback_data="delete_event")
+            builder.button(text="Create RSVP", callback_data="create_rsvp")
+            builder.button(text="View RSVP", callback_data="view_rsvp")
+            builder.button(text="Edit RSVP", callback_data="edit_rsvp")
+            builder.button(text="Delete RSVP", callback_data="delete_rsvp")
+            builder.button(text="Create Team", callback_data="create_team")
+            builder.button(text="View Teams", callback_data="view_teams")
+            builder.button(text="Edit Team", callback_data="edit_team")
+            builder.button(text="Delete Team", callback_data="delete_team")
+            builder.button(text="Create Feedback", callback_data="create_feedback")
+            builder.button(text="View Feedback", callback_data="view_feedback")
+            builder.button(text="Show Commands", callback_data="show_commands")
+            builder.button(text="Clear State", callback_data="clear")
+            builder.button(text="Settings", callback_data="settings")
+
+            builder.adjust(2)
+
+            await message.answer("Choose an action:", reply_markup=builder.as_markup())
+
         else:
-            welcome_text = REGISTRATION_TEXT
-            builder.button(text="Start data entry", callback_data="start_input")
-
-        builder.adjust(1)
-
-    logger.info(f"Sending welcome text: {welcome_text}")
-    print(f"Welcome text: {welcome_text}")
-    await message.answer(welcome_text, reply_markup=builder.as_markup())
-    await state.set_state(UserProfileStates.FIRST_NAME)
-    logger.info(f"State set to FIRST_NAME for user {message.from_user.id}")
+            await message.answer("Welcome! Let's start your registration. Please enter your first name:")
+            await state.set_state(UserStates.FIRST_NAME)
 
 
-@router.callback_query(StateFilter(UserProfileStates.FIRST_NAME))
-async def button_click(callback_query: types.CallbackQuery, state: FSMContext):
-    """Обработка нажатий на кнопки."""
-    print(f"Button clicked: {callback_query.data}")
-    logger.info(f"Button click: {callback_query.data}, User: {callback_query.from_user.id}")
-    await callback_query.answer()
+@user_router.message(UserStates.FIRST_NAME)
+async def user_first_name(message: types.Message, state: FSMContext):
+    """Save user's first name and ask for the last name."""
+    first_name = message.text.strip()
+    await state.update_data(first_name=first_name)
+    await message.answer("Enter your last name:")
+    await state.set_state(UserStates.LAST_NAME)
 
-    if callback_query.data == "start_input":
-        print("Starting input process")
-        await callback_query.message.edit_text(text="Enter your first name:")
-        await state.update_data(field="first_name", edit_mode=False)
-        await state.set_state(UserProfileStates.FIRST_NAME)
-        logger.info("State set to FIRST_NAME for new data entry")
 
-    elif callback_query.data == "skip_input":
-        print("Skipping input process")
-        logger.info("Skipping data input, showing menu")
-        await show_menu(callback_query, state)
+@user_router.message(UserStates.LAST_NAME)
+async def user_last_name(message: types.Message, state: FSMContext):
+    """Save user's last name and ask for age."""
+    last_name = message.text.strip()
+    await state.update_data(last_name=last_name)
+    await message.answer("Enter your age:")
+    await state.set_state(UserStates.AGE)
 
-    elif callback_query.data == "edit_profile":
-        print("Editing profile")
-        await callback_query.message.edit_text("Editing profile. Enter your new first name:")
-        await state.update_data(field="first_name", edit_mode=True)
-        await state.set_state(UserProfileStates.FIRST_NAME)
-        logger.info("State set to FIRST_NAME for profile editing")
 
-    elif callback_query.data == "view_profile":
-        print("Viewing profile")
-        logger.info("Viewing profile")
-        await view_profile(callback_query)
+@user_router.message(UserStates.AGE)
+async def user_age(message: types.Message, state: FSMContext):
+    """Save user's age and ask for experience."""
+    try:
+        age = int(message.text.strip())
+        await state.update_data(age=age)
+        await message.answer("Enter your work experience (in years):")
+        await state.set_state(UserStates.EXPERIENCE)
+    except ValueError:
+        await message.answer("Age must be a number. Please enter a valid age.")
 
-    elif callback_query.data == "settings":
-        print("Opening settings")
-        logger.info("Opening settings")
-        await settings(callback_query)
 
-    else:
-        print(f"Unknown button action: {callback_query.data}")
-        await callback_query.message.edit_text("Unknown action.")
+@user_router.message(UserStates.EXPERIENCE)
+async def user_experience(message: types.Message, state: FSMContext):
+    """Save user's experience and complete registration."""
+    try:
+        experience = int(message.text.strip())
+        data = await state.get_data()
+        first_name = data["first_name"]
+        last_name = data["last_name"]
+        age = data["age"]
 
-@router.message(StateFilter(UserProfileStates))
-async def handle_input(message: types.Message, state: FSMContext):
-    """Обработка пользовательского ввода."""
-    print(f"Handling user input: {message.text}")
-    data = await state.get_data()
-    print(f"State data: {data}")
-    field = data.get("field")
-    edit_mode = data.get("edit_mode", False)
+        user_id = convert_telegram_id_to_uuid(message.from_user.id)
 
-    if not field:
-        print("Error: unknown field")
-        await message.answer("Error: unknown field.")
+        async with get_async_session() as session:
+            user = await session.get(User, user_id)
+            if not user:
+                user = User(
+                    id=user_id,
+                    username=message.from_user.username,
+                    first_name=first_name,
+                    last_name=last_name,
+                    age=age,
+                    experience=experience,
+                )
+                session.add(user)
+            else:
+                user.first_name = first_name
+                user.last_name = last_name
+                user.age = age
+                user.experience = experience
+
+            await session.commit()
+            logger.info(f"User {user_id} registered or updated.")
+
+        await message.answer("Registration completed successfully! You can now use the bot's features.")
+        await state.clear()
+    except ValueError:
+        await message.answer("Experience must be a number. Please enter a valid value.")
+    except SQLAlchemyError as e:
+        logger.error(f"Database error during registration: {e}")
+        await message.answer("An error occurred during registration. Please try again later.")
+
+
+@user_router.callback_query(F.data == "edit_profile")
+async def edit_user(callback: types.CallbackQuery, state: FSMContext):
+    """Edit user profile."""
+    await callback.message.answer("Welcome! Let's edit your registration. Please enter your first name:")
+    await state.set_state(UserStates.FIRST_NAME)
+
+
+@user_router.callback_query(F.data.startswith("edit_"))
+async def handle_edit_action(callback: types.CallbackQuery, state: FSMContext):
+    """Handle specific edit actions."""
+    field = callback.data.split("_")[1]
+    field_map = {
+        "first_name": "first name",
+        "last_name": "last name",
+        "age": "age",
+        "experience": "work experience",
+    }
+
+    if field not in field_map:
+        await callback.answer("Unknown action.")
         return
 
-    value = message.text
+    await callback.message.edit_text(f"Enter your new {field_map[field]}:")
+    await state.update_data(field=field, edit_mode=True)
+    await state.set_state(getattr(UserStates, field.upper()))
 
-    async with get_async_session() as session:
-        try:
-            user_id = convert_telegram_id_to_uuid(message.from_user.id)
-            user = await session.get(User, user_id)
-            print(f"User fetched: {user}")
 
-            if not user:
-                print("Creating new user")
-                user = User(id=user_id, username=message.from_user.username)
-                session.add(user)
-
-            if field in ("age", "experience"):
-                try:
-                    value = int(value)
-                except ValueError:
-                    print(f"Invalid input for field {field}: {value}")
-                    await message.answer(f"Error: the '{field}' field must be a number. Please try again.")
-                    await show_menu(callback_query=None, message=message, state=state)
-                    return
-
-            setattr(user, field, value)
-            print(f"Updated user field {field}: {value}")
-            await session.commit()
-
-            next_field = None
-            if field == "first_name":
-                next_field = "last_name"
-                await message.answer("Enter your new last name:" if edit_mode else "Enter your last name:")
-            elif field == "last_name":
-                next_field = "age"
-                await message.answer("Enter your new age:" if edit_mode else "Enter your age:")
-            elif field == "age":
-                next_field = "experience"
-                await message.answer("Enter your new work experience:" if edit_mode else "Enter your work experience:")
-            elif field == "experience":
-                await message.answer(
-                    "Your profile has been updated. Choose an action." if edit_mode else "All data has been entered. Now choose an action."
-                )
-                await show_menu(callback_query=None, message=message, state=state)
-
-            if next_field:
-                await state.update_data(field=next_field)
-                print(f"Next field set to {next_field}")
-                await getattr(UserProfileStates, next_field.upper()).set()
-
-        except (ValueError, SQLAlchemyError) as e:
-            print(f"Error processing data: {e}")
-            await message.answer(f"Error processing data: {e}")
-            await session.rollback()
-
-@router.callback_query(lambda call: call.data == "view_profile")
+@user_router.callback_query(F.data == "view_profile")
 async def view_profile(callback_query: types.CallbackQuery):
-    print("View profile clicked")
-    logger.info(f"view_profile triggered by user {callback_query.from_user.id}")
+    """Просмотр профиля."""
+    user_id = convert_telegram_id_to_uuid(callback_query.from_user.id)
 
     try:
         async with get_async_session() as session:
-            user_id = convert_telegram_id_to_uuid(callback_query.from_user.id)
-            print(f"Converted User ID: {user_id}")
             user = await session.get(User, user_id)
-            print(f"Fetched user: {user}")
-
             if not user:
-                logger.warning(f"User {user_id} not found")
                 await callback_query.message.edit_text("Profile not found. Please complete the registration.")
                 return
 
@@ -184,7 +181,6 @@ async def view_profile(callback_query: types.CallbackQuery):
                 "age": user.age,
                 "experience": user.experience,
             }
-            print(f"User data: {user_data}")
 
             profile = (
                 f"👤 Your Profile:\n"
@@ -193,13 +189,8 @@ async def view_profile(callback_query: types.CallbackQuery):
                 f"Age: {user.age or 'N/A'}\n"
                 f"Experience: {user.experience or 'N/A'}\n"
             )
-            print(f"Profile content: {profile}")
 
             await callback_query.message.edit_text(profile)
-            print("Profile displayed successfully")
-            logger.info(f"Profile displayed for user {user_id}")
 
     except Exception as e:
-        print(f"Error in view_profile: {e}")
-        logger.error(f"Error in view_profile: {e}")
         await callback_query.message.edit_text("An error occurred while retrieving the profile.")

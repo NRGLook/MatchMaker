@@ -4,8 +4,9 @@ import asyncio
 from aiogram import Bot, Dispatcher
 
 from src.config.app_config import settings
-from src.functionality.user.handlers import router as user_router
-from src.functionality.base.handlers import router as menu_router
+from src.functionality.user.handlers import user_router
+from src.functionality.base.handlers import menu_router
+from src.functionality.event.handlers import event_router
 from src.functionality.settings.handlers import router as settings_router
 
 async def main():
@@ -17,6 +18,7 @@ async def main():
 
     dp.include_router(menu_router)
     dp.include_router(user_router)
+    dp.include_router(event_router)
     dp.include_router(settings_router)
 
     await dp.start_polling(bot)
