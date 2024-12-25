@@ -234,20 +234,3 @@ class Feedback(Base, TimestampMixin, IDMixin):
     )
 
     user: Mapped[User] = relationship("User", backref="feedbacks")
-
-
-class Link(Base, TimestampMixin, IDMixin):
-    __tablename__ = 'invitation_link'
-
-    link: Mapped[str] = mapped_column(
-        Text,
-        nullable=True,
-        comment="Link for telegram bot"
-    )
-    user_id: Mapped[UUID] = mapped_column(
-        ForeignKey('user.id', ondelete="CASCADE"),
-        nullable=False,
-        comment="ID of the user who left the link"
-    )
-
-    user: Mapped[User] = relationship("User", backref="feedbacks")
