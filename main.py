@@ -9,7 +9,7 @@ from src.functionality.base.handlers import menu_router
 from src.functionality.event.handlers import event_router
 from src.functionality.team.handlers import team_router
 from src.functionality.feedback.handlers import feedback_router
-from src.functionality.settings.handlers import router as settings_router
+from src.functionality.settings.handlers import settings_router
 
 async def main():
     """The main entry point for launching a Telegram bot."""

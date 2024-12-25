@@ -8,8 +8,9 @@ from src.config.database_config import get_async_session
 from src.models.database_models import User
 from src.services.logger import LoggerProvider
 from src.utils.helpers import convert_telegram_id_to_uuid
-from sqlalchemy.exc import SQLAlchemyError
 from src.utils.constants import WELCOME_TEXT, REGISTRATION_TEXT
+
+from sqlalchemy.exc import SQLAlchemyError
 
 user_router = Router()
 logger = LoggerProvider().get_logger(__name__)
@@ -146,7 +147,7 @@ async def edit_user(callback: types.CallbackQuery, state: FSMContext):
 
 @user_router.callback_query(F.data == "view_profile")
 async def view_profile(callback_query: types.CallbackQuery):
-    """Просмотр профиля."""
+    """View profile."""
     user_id = convert_telegram_id_to_uuid(callback_query.from_user.id)
 
     try:

@@ -3,6 +3,8 @@ from aiogram.filters import Command, StateFilter
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.config.database_config import get_async_session
@@ -10,7 +12,6 @@ from src.models.database_models import Feedback, User
 from src.services.logger import LoggerProvider
 from src.utils.helpers import convert_telegram_id_to_uuid
 
-from sqlalchemy import select
 
 feedback_router = Router()
 log = LoggerProvider().get_logger(__name__)
