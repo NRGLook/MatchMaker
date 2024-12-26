@@ -10,7 +10,8 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.orm import relationship, mapped_column, Mapped
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
+# from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 
 from src.models.mixins import TimestampMixin, IDMixin
